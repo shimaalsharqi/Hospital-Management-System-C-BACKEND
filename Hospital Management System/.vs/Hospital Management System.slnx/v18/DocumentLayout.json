@@ -1,0 +1,122 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\zoom store\\Desktop\\Hospital Management System\\Hospital Management System\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C2E29E31-814A-45C2-82A5-A2A723F7AE23}|Hospital Management System\\Hospital Management System.csproj|c:\\users\\zoom store\\desktop\\hospital management system\\hospital management system\\hospital management system\\hospitalmodel\\availableslotcs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2E29E31-814A-45C2-82A5-A2A723F7AE23}|Hospital Management System\\Hospital Management System.csproj|solutionrelative:hospital management system\\hospitalmodel\\availableslotcs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2E29E31-814A-45C2-82A5-A2A723F7AE23}|Hospital Management System\\Hospital Management System.csproj|c:\\users\\zoom store\\desktop\\hospital management system\\hospital management system\\hospital management system\\hospitalmodel\\medicalrecordcs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2E29E31-814A-45C2-82A5-A2A723F7AE23}|Hospital Management System\\Hospital Management System.csproj|solutionrelative:hospital management system\\hospitalmodel\\medicalrecordcs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2E29E31-814A-45C2-82A5-A2A723F7AE23}|Hospital Management System\\Hospital Management System.csproj|c:\\users\\zoom store\\desktop\\hospital management system\\hospital management system\\hospital management system\\hospitalmodel\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2E29E31-814A-45C2-82A5-A2A723F7AE23}|Hospital Management System\\Hospital Management System.csproj|solutionrelative:hospital management system\\hospitalmodel\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2E29E31-814A-45C2-82A5-A2A723F7AE23}|Hospital Management System\\Hospital Management System.csproj|c:\\users\\zoom store\\desktop\\hospital management system\\hospital management system\\hospital management system\\hospitalmodel\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2E29E31-814A-45C2-82A5-A2A723F7AE23}|Hospital Management System\\Hospital Management System.csproj|solutionrelative:hospital management system\\hospitalmodel\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2E29E31-814A-45C2-82A5-A2A723F7AE23}|Hospital Management System\\Hospital Management System.csproj|c:\\users\\zoom store\\desktop\\hospital management system\\hospital management system\\hospital management system\\hospitalmodel\\patient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2E29E31-814A-45C2-82A5-A2A723F7AE23}|Hospital Management System\\Hospital Management System.csproj|solutionrelative:hospital management system\\hospitalmodel\\patient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2E29E31-814A-45C2-82A5-A2A723F7AE23}|Hospital Management System\\Hospital Management System.csproj|c:\\users\\zoom store\\desktop\\hospital management system\\hospital management system\\hospital management system\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2E29E31-814A-45C2-82A5-A2A723F7AE23}|Hospital Management System\\Hospital Management System.csproj|solutionrelative:hospital management system\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AvailableSlotcs.cs",
+              "DocumentMoniker": "C:\\Users\\zoom store\\Desktop\\Hospital Management System\\Hospital Management System\\Hospital Management System\\HospitalModel\\AvailableSlotcs.cs",
+              "RelativeDocumentMoniker": "Hospital Management System\\HospitalModel\\AvailableSlotcs.cs",
+              "ToolTip": "C:\\Users\\zoom store\\Desktop\\Hospital Management System\\Hospital Management System\\Hospital Management System\\HospitalModel\\AvailableSlotcs.cs",
+              "RelativeToolTip": "Hospital Management System\\HospitalModel\\AvailableSlotcs.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-11T10:21:41.326Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MedicalRecordcs.cs",
+              "DocumentMoniker": "C:\\Users\\zoom store\\Desktop\\Hospital Management System\\Hospital Management System\\Hospital Management System\\HospitalModel\\MedicalRecordcs.cs",
+              "RelativeDocumentMoniker": "Hospital Management System\\HospitalModel\\MedicalRecordcs.cs",
+              "ToolTip": "C:\\Users\\zoom store\\Desktop\\Hospital Management System\\Hospital Management System\\Hospital Management System\\HospitalModel\\MedicalRecordcs.cs",
+              "RelativeToolTip": "Hospital Management System\\HospitalModel\\MedicalRecordcs.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-11T10:16:28.152Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Appointment.cs",
+              "DocumentMoniker": "C:\\Users\\zoom store\\Desktop\\Hospital Management System\\Hospital Management System\\Hospital Management System\\HospitalModel\\Appointment.cs",
+              "RelativeDocumentMoniker": "Hospital Management System\\HospitalModel\\Appointment.cs",
+              "ToolTip": "C:\\Users\\zoom store\\Desktop\\Hospital Management System\\Hospital Management System\\Hospital Management System\\HospitalModel\\Appointment.cs",
+              "RelativeToolTip": "Hospital Management System\\HospitalModel\\Appointment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-11T10:12:18.265Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Doctor.cs",
+              "DocumentMoniker": "C:\\Users\\zoom store\\Desktop\\Hospital Management System\\Hospital Management System\\Hospital Management System\\HospitalModel\\Doctor.cs",
+              "RelativeDocumentMoniker": "Hospital Management System\\HospitalModel\\Doctor.cs",
+              "ToolTip": "C:\\Users\\zoom store\\Desktop\\Hospital Management System\\Hospital Management System\\Hospital Management System\\HospitalModel\\Doctor.cs",
+              "RelativeToolTip": "Hospital Management System\\HospitalModel\\Doctor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-11T10:06:00.338Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Patient.cs",
+              "DocumentMoniker": "C:\\Users\\zoom store\\Desktop\\Hospital Management System\\Hospital Management System\\Hospital Management System\\HospitalModel\\Patient.cs",
+              "RelativeDocumentMoniker": "Hospital Management System\\HospitalModel\\Patient.cs",
+              "ToolTip": "C:\\Users\\zoom store\\Desktop\\Hospital Management System\\Hospital Management System\\Hospital Management System\\HospitalModel\\Patient.cs",
+              "RelativeToolTip": "Hospital Management System\\HospitalModel\\Patient.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-11T09:26:38.883Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\zoom store\\Desktop\\Hospital Management System\\Hospital Management System\\Hospital Management System\\Program.cs",
+              "RelativeDocumentMoniker": "Hospital Management System\\Program.cs",
+              "ToolTip": "C:\\Users\\zoom store\\Desktop\\Hospital Management System\\Hospital Management System\\Hospital Management System\\Program.cs",
+              "RelativeToolTip": "Hospital Management System\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-11T09:19:50.599Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
