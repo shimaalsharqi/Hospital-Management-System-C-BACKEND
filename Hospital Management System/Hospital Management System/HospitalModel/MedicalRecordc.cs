@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Hospital_Management_System.HospitalModel
 {
-    public class MedicalRecordcs
+    public class MedicalRecordc
     {
         public int recordId { get; set; }
         public int appointmentId { get; set; }
