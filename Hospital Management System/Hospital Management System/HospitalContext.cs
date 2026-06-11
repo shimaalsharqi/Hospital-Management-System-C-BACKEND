@@ -5,7 +5,7 @@ using Hospital_Management_System.HospitalModel;
 
 namespace Hospital_Management_System
 {
-    public class Hospital_Contextcs
+    public class HospitalContext
     {
         //system storage
         public List <Patient> patients { get; set; }
