@@ -1,10 +1,49 @@
 ﻿using Hospital_Management_System.HospitalModel;
+using System.Reflection;
 using System.Text;
 namespace Hospital_Management_System
 
 {
     public class Program
     {
+
+        //Patient Registration Function
+        public static void PatientRegistration(HospitalContext context) {
+            //patient information
+            Console.WriteLine("Enter your name");
+            string name = Console.ReadLine();
+            Console.WriteLine("Enter your age");
+            int age = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter your Gender");
+            string gender = Console.ReadLine();
+            Console.WriteLine("Enter your phone number");
+            string phoneNumber = Console.ReadLine();
+            Console.WriteLine("Enter your Email ");
+            string Email = Console.ReadLine();
+            Console.WriteLine("Enter your Blood Type");
+            string bloodType = Console.ReadLine();
+
+            int userId = (context.patients.Count) + 1;
+
+            context.patients.Add(
+                new Patient
+            {
+                patientId=userId,
+                patientName = name,
+                patientAge= age,
+                patientGender= gender,
+                patientPhone= phoneNumber,
+                patientEmail= Email,
+                patientBloodType= bloodType
+
+
+                }
+              );
+            Console.WriteLine("Customer Added Successfully with ID " + userId);
+
+        }
+
+        //Main the program
         static void Main(string[] args)
         {
             //data storage for the system ( in memory )
@@ -39,7 +78,7 @@ namespace Hospital_Management_System
                 switch (option)
                 {
                     case 1:
-
+                        PatientRegistration(mainContext);
                         break;
                     case 2:
 
