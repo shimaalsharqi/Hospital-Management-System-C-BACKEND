@@ -1,6 +1,7 @@
 ﻿using Hospital_Management_System.HospitalModel;
 using System.Reflection;
 using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace Hospital_Management_System
 
 {
@@ -39,7 +40,37 @@ namespace Hospital_Management_System
 
                 }
               );
-            Console.WriteLine("Customer Added Successfully with ID " + userId);
+            Console.WriteLine("Pateint  Added Successfully with ID " + userId);
+
+        }
+        //Add a New Doctor Function
+        public static void AddDcotor(HospitalContext context)
+        {
+            Console.WriteLine("Enter the doctor Name");
+            string dname = Console.ReadLine(); 
+            Console.WriteLine("Enter the doctor Specialization");
+            string dSpecialization = Console.ReadLine();
+            Console.WriteLine("Enter the doctor Phone Number");
+            string dPhoneNumber = Console.ReadLine();
+            Console.WriteLine("Enter the doctor  Email");
+            string dEmail = Console.ReadLine();
+            Console.WriteLine("Enter the doctor consultationFee");
+            decimal dconsultationFee = decimal.Parse(Console.ReadLine());
+            int newDoctorId = (context.Decoders.Count) + 1;
+
+            //context.Decoders.Add(
+            //    new Doctor
+            //    {
+            //        doctorId = newDoctorId,
+            //        doctorName = dname,
+            //        doctorSpecialization= dSpecialization,
+            //        doctorPhone= dPhoneNumber,
+            //        doctorEmail= dEmail,
+            //        consultationFee= dconsultationFee
+
+            //    }
+            //    );
+            Console.WriteLine("Doctor  Added Successfully with ID " + newDoctorId);
 
         }
 
@@ -56,7 +87,7 @@ namespace Hospital_Management_System
 
             bool stop = false;
 
-            while (stop = false)
+            while (stop ==false)
             {
                 //the  menu of the system 
 
