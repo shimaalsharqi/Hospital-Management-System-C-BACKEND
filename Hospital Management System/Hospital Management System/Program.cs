@@ -73,6 +73,30 @@ namespace Hospital_Management_System
             Console.WriteLine("Doctor  Added Successfully with ID " + newDoctorId);
 
         }
+        //View All Patients Function
+
+        public static void ViewAllPatients(HospitalContext context)
+        {
+            if (context.Decoders.Count== 0)
+            {
+                Console.WriteLine("No patients registered yet.");
+                return;
+            }
+            else
+            {
+                foreach (var patient in context.patients)
+                {
+                    
+                    Console.WriteLine("ID: " + patient.patientId);
+                    Console.WriteLine("Name: " + patient.patientName);
+                    Console.WriteLine("Age: " + patient.patientAge);
+                    Console.WriteLine("Gender: " + patient.patientGender);
+                    Console.WriteLine("Phone: " + patient.patientPhone);
+                    Console.WriteLine("Email: " + patient.patientEmail);
+                    Console.WriteLine("Blood Type: " + patient.patientBloodType);
+                }
+            }
+        }
 
         //Main the program
         static void Main(string[] args)
@@ -112,6 +136,7 @@ namespace Hospital_Management_System
                         PatientRegistration(mainContext);
                         break;
                     case 2:
+                        AddDcotor(mainContext);
 
                         break;
                     case 3:
