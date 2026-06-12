@@ -58,18 +58,18 @@ namespace Hospital_Management_System
             decimal dconsultationFee = decimal.Parse(Console.ReadLine());
             int newDoctorId = (context.Decoders.Count) + 1;
 
-            //context.Decoders.Add(
-            //    new Doctor
-            //    {
-            //        doctorId = newDoctorId,
-            //        doctorName = dname,
-            //        doctorSpecialization= dSpecialization,
-            //        doctorPhone= dPhoneNumber,
-            //        doctorEmail= dEmail,
-            //        consultationFee= dconsultationFee
+            context.Decoders.Add(
+                new Doctor
+                {
+                    doctorId = newDoctorId,
+                    doctorName = dname,
+                    doctorSpecialization = dSpecialization,
+                    doctorPhone = dPhoneNumber,
+                    doctorEmail = dEmail,
+                    consultationFee = dconsultationFee
 
-            //    }
-            //    );
+                }
+                );
             Console.WriteLine("Doctor  Added Successfully with ID " + newDoctorId);
 
         }
@@ -98,6 +98,37 @@ namespace Hospital_Management_System
             }
         }
 
+        //View All Doctors by Specialization Function
+
+        public static void ViewDoctorsBySpecialization(HospitalContext context)
+        {
+            Console.WriteLine("Enter Specialization:");
+            string specialization = Console.ReadLine();
+
+            bool found = false;
+
+            foreach (var doctor in context.Decoders)
+            {
+                if (doctor.doctorSpecialization == specialization)
+                {
+                    found = true;
+
+                    Console.WriteLine("ID: " + doctor.doctorId);
+                    Console.WriteLine("Name: " + doctor.doctorName);
+                    Console.WriteLine("Specialization: " + doctor.doctorSpecialization);
+                    Console.WriteLine("Phone: " + doctor.doctorPhone);
+                    Console.WriteLine("Email: " + doctor.doctorEmail);
+                   
+                }
+            }
+
+            if (found == false)
+            {
+                Console.WriteLine("No doctors found with this specialization.");
+            }
+        }
+       
+
         //Main the program
         static void Main(string[] args)
         {
@@ -105,7 +136,7 @@ namespace Hospital_Management_System
             HospitalContext mainContext = new HospitalContext();
             mainContext.patients = new List<Patient>();
             mainContext.MedicalRecordcs = new List<MedicalRecordc>();
-            mainContext.Decoders = new List<Decoder>();
+            mainContext.Decoders = new List<Doctor>();
             mainContext.AvailableSlotcs = new List<AvailableSlotc>();
             mainContext.Appointments = new List<Appointment>();
 

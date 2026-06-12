@@ -10,7 +10,7 @@ namespace Hospital_Management_System
         //system storage
         public List <Patient> patients { get; set; }
         public List<MedicalRecordc> MedicalRecordcs { get; set; }
-        public List<Decoder> Decoders { get; set; }
+        public List<Doctor> Decoders { get; set; }
         public List<AvailableSlotc> AvailableSlotcs { get; set; }
         public List<Appointment> Appointments { get; set; }
 

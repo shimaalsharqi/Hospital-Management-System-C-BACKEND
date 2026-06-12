@@ -32,7 +32,7 @@
               "RelativeDocumentMoniker": "Hospital Management System\\Program.cs",
               "ToolTip": "C:\\Users\\zoom store\\Desktop\\Hospital Management System\\Hospital Management System\\Hospital Management System\\Program.cs",
               "RelativeToolTip": "Hospital Management System\\Program.cs",
-              "ViewState": "AgIAAEYAAAAAAAAAAAAAAEsAAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAFwAAAAAAAAAAAAAAGEAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-11T11:10:44.14Z",
               "IsPinned": true,
@@ -50,9 +50,10 @@
               "RelativeDocumentMoniker": "Hospital Management System\\HospitalModel\\Doctor.cs",
               "ToolTip": "C:\\Users\\zoom store\\Desktop\\Hospital Management System\\Hospital Management System\\Hospital Management System\\HospitalModel\\Doctor.cs",
               "RelativeToolTip": "Hospital Management System\\HospitalModel\\Doctor.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T12:47:37.805Z"
+              "WhenOpened": "2026-06-12T12:47:37.805Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -62,9 +63,10 @@
               "RelativeDocumentMoniker": "Hospital Management System\\HospitalContext.cs",
               "ToolTip": "C:\\Users\\zoom store\\Desktop\\Hospital Management System\\Hospital Management System\\Hospital Management System\\HospitalContext.cs",
               "RelativeToolTip": "Hospital Management System\\HospitalContext.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAADwvwwAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAAQAAAAAAAAAAADwvwwAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T10:34:01.154Z"
+              "WhenOpened": "2026-06-11T10:34:01.154Z",
+              "EditorCaption": ""
             }
           ]
         }
