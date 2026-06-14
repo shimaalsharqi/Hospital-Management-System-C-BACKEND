@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Timers;
+using static System.Reflection.Metadata.BlobBuilder;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace Hospital_Management_System
 
@@ -10,7 +11,7 @@ namespace Hospital_Management_System
     public class Program
     {
 
-        //Patient Registration Function
+        //1 Patient Registration Function
         public static void PatientRegistration(HospitalContext context) {
             //patient information
             Console.WriteLine("Enter your name");
@@ -45,7 +46,8 @@ namespace Hospital_Management_System
             Console.WriteLine("Pateint  Added Successfully with ID " + userId);
 
         }
-        //Add a New Doctor Function
+
+        //2 Add a New Doctor Function
         public static void AddDcotor(HospitalContext context)
         {
             Console.WriteLine("Enter the doctor Name");
@@ -75,8 +77,8 @@ namespace Hospital_Management_System
             Console.WriteLine("Doctor  Added Successfully with ID " + newDoctorId);
 
         }
-        //View All Patients Function
 
+        //3 View All Patients Function
         public static void ViewAllPatients(HospitalContext context)
         {
             if (context.Decoders.Count== 0)
@@ -100,8 +102,8 @@ namespace Hospital_Management_System
             }
         }
 
-        //View All Doctors by Specialization Function
 
+        //4 View All Doctors by Specialization Function
         public static void ViewDoctorsBySpecialization(HospitalContext context)
         {
             Console.WriteLine("Enter Specialization:");
@@ -129,20 +131,51 @@ namespace Hospital_Management_System
             }
 
         }
-        // Add an Available Time Slot for a Doctor Function
+        //5 Add an Available Time Slot for a Doctor Function
         public static void AvailableTimeSlot(HospitalContext context)
         {
-            foreach (var doctor in context.Decoders)
-            {
-                Console.WriteLine($"{doctor.doctorId}:{doctor.doctorName}");
-            }
             Console.WriteLine("Enter the Number of Doctor Id you Want");
             int numberOfId = int.Parse(Console.ReadLine());
+
+            //check the doctor if is found
+            bool doctorFound = false;
+
+            foreach (var doctor in context.Decoders)
+            {
+                if (doctor.doctorId == numberOfId)
+                {
+                    doctorFound = true;
+                    break;
+                }
+                else 
+                {
+                    Console.WriteLine("The doctor was not found.");
+                    return;
+                }
+            }
+            //enters  date and time
             Console.WriteLine("Enter the date and time you want");
             string dateOfSlot = Console.ReadLine();
             string timeOfSlot = Console.ReadLine();
 
-            int slotId = (context.AvailableSlotcs.Count) + 1;
+            //For check if there is any time or date repeat
+            bool repeat = false;
+            foreach (var slot in context.AvailableSlotcs)
+            {
+                if (dateOfSlot != slot.slotDate && timeOfSlot != slot.slotTime)
+                {
+                    Console.WriteLine("the date and time are not avilable");
+                    repeat = true;
+                    return;
+                }
+                else
+                {
+                    Console.WriteLine("the date and time are avilable");
+                }
+            }
+
+            //Add a new slot
+                int slotId = (context.AvailableSlotcs.Count) + 1;
 
             context.AvailableSlotcs.Add(new AvailableSlotc
             {
@@ -157,9 +190,101 @@ namespace Hospital_Management_System
             
         }
 
+        //6 Book an Appointment Function
+        public static void BookAppointment(HospitalContext context)
+        {
+            Console.WriteLine("Enter the patient Id");
+            int IdOfPatient = int.Parse(Console.ReadLine());
+            //check if the patient found
+            bool patientFound = false;
+            foreach (var patient in context.patients)
+            {
+                if(IdOfPatient== patient.patientId)
+                {
+                    
+                    Console.WriteLine("the Patient found, Now you can complete");
+                    patientFound = true; 
+                    break;
+                    
+                }
+                else
+                {
+                    Console.WriteLine("the Patient not found");
+                    return;
+                }
+ 
+            }
+           
+            Console.WriteLine("Enter the doctor Id you want");
+            int IdOfDoctor = int.Parse(Console.ReadLine());
+            //check if the doctor found
+            bool doctorFound = false;
+            foreach (var doctor in context.Decoders)
+            {
+                if (IdOfDoctor == doctor.doctorId)
+                {
+                    Console.WriteLine("the doctor found, Now you can complete");
+                    doctorFound = true;
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("the doctor not found");
+                    return;
+                }
 
+            }
+            // view all available slots
 
-        //Main the program
+            foreach (var book in context.AvailableSlotcs)
+            {
+               
+                if (book.isBooked == false && book.doctorId== IdOfDoctor)
+                {
+                    Console.WriteLine($"slotId:{book.slotId}," +
+                                      $"slotDate:{book.slotDate}," +
+                                      $"slotTime:{book.slotTime}");
+
+                }
+                else
+                {
+                    Console.WriteLine("There are no available slots ");
+                    return;
+                }
+            }
+            Console.WriteLine("Enter the slot id ");
+            int slotIdByUser = int.Parse(Console.ReadLine());
+        
+            foreach (var slot in context.AvailableSlotcs)
+            {
+                if (slot.slotId!= slotIdByUser)
+                {
+                    Console.WriteLine("Invalid slot ");
+                    return;
+                }
+                else
+                {
+                    Console.WriteLine("the slot choosen ");
+                    slot.isBooked = true;
+                }
+            }
+
+            int AppointmentId = (context.Appointments.Count) + 1;
+            context.Appointments.Add(
+                new Appointment
+                {
+                    appointmentId = AppointmentId,
+                    patientId = IdOfPatient,
+                    doctorId = IdOfDoctor,
+                    slotId = slotIdByUser
+                });
+            
+
+        }
+
+        //Cancel an Appointment
+
+        //Main the program Function
         static void Main(string[] args)
         {
             //data storage for the system ( in memory )
@@ -201,16 +326,16 @@ namespace Hospital_Management_System
 
                         break;
                     case 3:
-
+                        ViewAllPatients(mainContext);
                         break;
                     case 4:
-
+                        ViewDoctorsBySpecialization(mainContext);
                         break;
                     case 5:
-
+                        AvailableTimeSlot(mainContext);
                         break;
                     case 6:
-
+                        BookAppointment(mainContext);
                         break;
                     case 7:
 
