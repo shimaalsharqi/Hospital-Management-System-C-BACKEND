@@ -278,12 +278,35 @@ namespace Hospital_Management_System
                     doctorId = IdOfDoctor,
                     slotId = slotIdByUser
                 });
-            
 
+            Console.WriteLine("Book  Appointment Added Successfully with ID " + AppointmentId);
         }
 
-        //Cancel an Appointment
+        //7 Cancel an Appointment
+        public static void CancelAppointment(HospitalContext context)
+        {
+            Console.WriteLine("Enter the Book Appointment Id ");
+            int bookAppointmentId = int.Parse(Console.ReadLine());
+            foreach (var app in context.Appointments)
+            {
+                bool appointmentId = false;
+                if (app.appointmentId== bookAppointmentId)
+                {
+                    Console.WriteLine("the book Appointment Id is found ");
+                    appointmentId = true;
+                   
+                }
+                else
+                {
+                    Console.WriteLine("the book Appointment Id is not found ");
+                }
+                
+            }
+            //Remove the  book Appointment Id
+            //context.Appointments.Remove(Appointment bookAppointmentId);
 
+
+        }
         //Main the program Function
         static void Main(string[] args)
         {
