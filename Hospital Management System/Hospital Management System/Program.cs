@@ -1,6 +1,8 @@
 ﻿using Hospital_Management_System.HospitalModel;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Timers;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace Hospital_Management_System
 
@@ -105,29 +107,57 @@ namespace Hospital_Management_System
             Console.WriteLine("Enter Specialization:");
             string specialization = Console.ReadLine();
 
-            bool found = false;
+            
 
             foreach (var doctor in context.Decoders)
             {
                 if (doctor.doctorSpecialization == specialization)
                 {
-                    found = true;
+                   
 
                     Console.WriteLine("ID: " + doctor.doctorId);
                     Console.WriteLine("Name: " + doctor.doctorName);
                     Console.WriteLine("Specialization: " + doctor.doctorSpecialization);
                     Console.WriteLine("Phone: " + doctor.doctorPhone);
                     Console.WriteLine("Email: " + doctor.doctorEmail);
-                   
+
+                }
+                else
+                {
+                    Console.WriteLine("No doctors found with this specialization.");
                 }
             }
 
-            if (found == false)
-            {
-                Console.WriteLine("No doctors found with this specialization.");
-            }
         }
-       
+        // Add an Available Time Slot for a Doctor Function
+        public static void AvailableTimeSlot(HospitalContext context)
+        {
+            foreach (var doctor in context.Decoders)
+            {
+                Console.WriteLine($"{doctor.doctorId}:{doctor.doctorName}");
+            }
+            Console.WriteLine("Enter the Number of Doctor Id you Want");
+            int numberOfId = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter the date and time you want");
+            string dateOfSlot = Console.ReadLine();
+            string timeOfSlot = Console.ReadLine();
+
+            int slotId = (context.AvailableSlotcs.Count) + 1;
+
+            context.AvailableSlotcs.Add(new AvailableSlotc
+            {
+                slotId= slotId,
+                doctorId = numberOfId,
+                slotDate= dateOfSlot,
+                slotTime= timeOfSlot
+
+            });
+
+                Console.WriteLine("the slot has been added");
+            
+        }
+
+
 
         //Main the program
         static void Main(string[] args)
