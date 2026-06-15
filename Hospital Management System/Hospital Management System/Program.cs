@@ -1,4 +1,5 @@
 ﻿using Hospital_Management_System.HospitalModel;
+using System.Numerics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -282,7 +283,7 @@ namespace Hospital_Management_System
             Console.WriteLine("Book  Appointment Added Successfully with ID " + AppointmentId);
         }
 
-        //7 Cancel an Appointment
+        //7 Cancel an Appointment Function
         public static void CancelAppointment(HospitalContext context)
         {
             Console.WriteLine("Enter the Book Appointment Id ");
@@ -307,6 +308,102 @@ namespace Hospital_Management_System
 
 
         }
+
+        //8 Create a Medical Record After a Visit Function
+        public static void MedicalRecordAfterVisit(HospitalContext context)
+        {
+            //Patient Info
+            Console.WriteLine("Enter the pateint Id");
+            int patientOfId = int.Parse(Console.ReadLine());
+            bool patientFound = false;
+            foreach (var petient in context.patients)
+            {
+              if(petient.patientId== patientOfId)
+                {
+                    Console.WriteLine("the Patient Id found");
+                    patientFound = true;
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("the Patient Id not found");
+                    return;
+                }
+            }
+
+            //Doctor Info
+          
+            Console.WriteLine("Enter the doctor Id");
+            int doctorOfId = int.Parse(Console.ReadLine());
+            bool doctorFound = false;
+            decimal visitFeeUser = 0;
+            foreach (var doctor in context.Decoders)
+            {
+                if (doctor.doctorId == doctorOfId)
+                {
+                    Console.WriteLine("the Doctor Id found");
+                    visitFeeUser = doctor.consultationFee;
+                    doctorFound = true;
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("the Doctor Id not found");
+                    return;
+                }
+            }
+
+            //appointment Info
+
+            Console.WriteLine("Enter the appointment Id");
+            int appointmentOfId = int.Parse(Console.ReadLine());
+            bool appointmentFound = false;
+            foreach (var appointment in context.Appointments)
+            {
+                if (appointment.appointmentId == appointmentOfId)
+                {
+                    Console.WriteLine("the appointment Id found");
+                    //To updated to reflect that the visit has been completed
+                    appointment.status = "completed";
+                    appointmentFound = true;
+                  
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("the appointment Id not found");
+                    return;
+                }
+                
+            }
+
+            Console.WriteLine("Enter the diagnosis");
+            string diagnosisUser = Console.ReadLine();
+
+            Console.WriteLine("Enter the prescription");
+            string prescriptionUser = Console.ReadLine();
+
+            Console.WriteLine("Enter the visitDate");
+            string visitDateUser = Console.ReadLine();
+  
+            int recordIdNew = (context.MedicalRecordcs.Count) + 1;
+            context.MedicalRecordcs.Add(
+                new MedicalRecordc
+                {
+                    recordId = recordIdNew,
+                    patientId = patientOfId,
+                    doctorId= doctorOfId,
+                    appointmentId= appointmentOfId,
+                    diagnosis= diagnosisUser,
+                    prescription= prescriptionUser,
+                    visitDate= visitDateUser,
+                    visitFee= visitFeeUser
+                }
+                );
+
+            Console.WriteLine("Record Id Added Successfully with ID " + recordIdNew);
+        }
+
         //Main the program Function
         static void Main(string[] args)
         {
@@ -361,18 +458,15 @@ namespace Hospital_Management_System
                         BookAppointment(mainContext);
                         break;
                     case 7:
-
+                        CancelAppointment(mainContext);
                         break;
                     case 8:
-
+                        MedicalRecordAfterVisit(mainContext);
                         break;
                     case 9:
 
                         break;
                     case 10:
-
-                        break;
-                    case 11:
 
                         break;
                     case 0:
