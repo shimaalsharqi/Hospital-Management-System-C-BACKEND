@@ -245,7 +245,7 @@ namespace Hospital_Management_System
                     Console.WriteLine($"slotId:{book.slotId}," +
                                       $"slotDate:{book.slotDate}," +
                                       $"slotTime:{book.slotTime}");
-
+                    break;
                 }
                 else
                 {
@@ -267,6 +267,7 @@ namespace Hospital_Management_System
                 {
                     Console.WriteLine("the slot choosen ");
                     slot.isBooked = true;
+                    break;
                 }
             }
 
@@ -286,27 +287,35 @@ namespace Hospital_Management_System
         //7 Cancel an Appointment Function
         public static void CancelAppointment(HospitalContext context)
         {
-            Console.WriteLine("Enter the Book Appointment Id ");
+            Console.WriteLine("Enter the Book Appointment Id");
             int bookAppointmentId = int.Parse(Console.ReadLine());
+
+            bool appointmentIdfound = false;
+
             foreach (var app in context.Appointments)
             {
-                bool appointmentId = false;
-                if (app.appointmentId== bookAppointmentId)
+                if (app.appointmentId == bookAppointmentId)
                 {
-                    Console.WriteLine("the book Appointment Id is found ");
-                    appointmentId = true;
-                   
+                    appointmentIdfound = true;
+
+                    if (app.status == "cancelled")
+                    {
+                        Console.WriteLine("Appointment already cancelled");
+                    }
+                    else
+                    {
+                        app.status = "cancelled";
+                        Console.WriteLine("Appointment cancelled successfully");
+                    }
+
+                    break;
                 }
-                else
-                {
-                    Console.WriteLine("the book Appointment Id is not found ");
-                }
-                
             }
-            //Remove the  book Appointment Id
-            //context.Appointments.Remove(Appointment bookAppointmentId);
 
-
+            if (appointmentIdfound = false)
+            {
+                Console.WriteLine("Appointment Id not found");
+            }
         }
 
         //8 Create a Medical Record After a Visit Function
