@@ -14,5 +14,13 @@ namespace Hospital_Management_System.HospitalModel
         public string patientEmail { get; set; }
         public string patientBloodType { get; set; }
 
+        //Function To Convert the Data To String
+        public void ConvertDataPatientToString()
+        {
+            Console.WriteLine($"{patientId} | {patientName,-10} | {patientGender,-8} |{patientPhone,-8} |" +
+                $" {patientEmail,-8} | {patientBloodType,-8} | {patientAge,9}" );
+        }
+
+
     }
 }
