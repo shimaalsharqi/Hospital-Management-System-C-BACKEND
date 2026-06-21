@@ -81,17 +81,17 @@ namespace Hospital_Management_System
         }
 
         //3 View All Patients Function
-        public static void ViewAllPatients(List<Patient> patients)
+        public static void ViewAllPatients(HospitalContext context)
         {
 
             //If no patients have been registered
-            if (patients.Count == 0)
+            if (context.patients.Count == 0)
             {
                 Console.WriteLine("No patients registered yet.");
                 return;
             }
             //To view every patient currently registered 
-            foreach (var patient in patients)
+            foreach (var patient in context.patients)
             {
 
                 patient.PatientInfo();
@@ -337,41 +337,88 @@ namespace Hospital_Management_System
             if (bookAppointmentIdFound.status == "Completed")
             {
                 Console.WriteLine("A medical record already exists for this appointment");
+                return;
+            }
+            // to get the consultationFee
+            decimal fee = context.Decoders.Where(d => d.doctorId == bookAppointmentIdFound.doctorId)
+                                         .Select(d => d.consultationFee)
+                                         .FirstOrDefault();
 
-                // to get the consultationFee
-                decimal fee = context.Decoders.Where(d => d.doctorId == bookAppointmentIdFound.doctorId)
-                                             .Select(d => d.consultationFee)
-                                             .FirstOrDefault();
+            Console.WriteLine("Enter the diagnosis");
+            string diagnosisUser = Console.ReadLine();
 
-                Console.WriteLine("Enter the diagnosis");
-                string diagnosisUser = Console.ReadLine();
+            Console.WriteLine("Enter the prescription");
+            string prescriptionUser = Console.ReadLine();
 
-                Console.WriteLine("Enter the prescription");
-                string prescriptionUser = Console.ReadLine();
+            Console.WriteLine("Enter the visitDate");
+            string visitDateUser = Console.ReadLine();
 
-                Console.WriteLine("Enter the visitDate");
-                string visitDateUser = Console.ReadLine();
+            int recordIdNew = (context.MedicalRecordcs.Count) + 1;
+            context.MedicalRecordcs.Add(
+                new MedicalRecordc
+                {
+                    recordId = recordIdNew,
+                    appointmentId = appointmentOfId,
+                    diagnosis = diagnosisUser,
+                    prescription = prescriptionUser,
+                    visitDate = visitDateUser,
+                    visitFee = fee
+                }
+            );
 
-                int recordIdNew = (context.MedicalRecordcs.Count) + 1;
-                context.MedicalRecordcs.Add(
-                    new MedicalRecordc
-                    {
-                        recordId = recordIdNew,
-                        appointmentId = appointmentOfId,
-                        diagnosis = diagnosisUser,
-                        prescription = prescriptionUser,
-                        visitDate = visitDateUser,
-                        visitFee = fee
-                    }
-                    );
+            Console.WriteLine($"Record Id Added Successfully with ID   {recordIdNew}  | Fee charged: {fee}");
+            bookAppointmentIdFound.status = "cmplated";
+        }
 
-                Console.WriteLine($"Record Id Added Successfully with ID   {recordIdNew}  | Fee charged: {fee}");
-                bookAppointmentIdFound.status = "cmplated";
+        //9 Generate a Patient Medical History Report
+        public static void GeneratePatientMedicalHistoryReport(HospitalContext context)
+        {
+            Console.WriteLine("Enter the patient Id");
+            int IdOfPatient = int.Parse(Console.ReadLine());
+
+            //*********check if the patient found By LINQ*********//
+            bool patientFound = context.patients
+                                       .Any(a => a.patientId == IdOfPatient);
+            if (patientFound == false)
+            {
+                Console.WriteLine("The patient not found");
+                return;
             }
 
-            //Main the program Function
-            static void Main(string[] args)
+            List<MedicalRecordc> records = context.MedicalRecordcs
+                                                  .Where(r => r.patientId == IdOfPatient)
+                                                  .ToList();
+
+            if (records.Count == 0)
             {
+                Console.WriteLine("No medical records found");
+                return;
+            }
+            records.ForEach(r =>
+            {
+                // to Know doctor name
+                string doctorName = context.Decoders
+                    .Where(d => d.doctorId == r.doctorId)
+                    .Select(d => d.doctorName)
+                    .FirstOrDefault();
+
+                Console.WriteLine($" Record ID   : {r.recordId}");
+                Console.WriteLine($"  Visit Date  : {r.visitDate}");
+                Console.WriteLine($"  Doctor      : {doctorName}");
+                Console.WriteLine($"  Diagnosis   : {r.diagnosis}");
+                Console.WriteLine($"  Prescription: {r.prescription}");
+                Console.WriteLine($"  Fee Charged : {r.visitFee}");
+
+                // total all fees
+                decimal total = records.Sum(r => r.visitFee);
+                Console.WriteLine($"total amount: {total}");
+            });
+
+        }
+        //Main the program Function
+        static void Main(string[] args)
+        {
+            
                 //data storage for the system ( in memory )
                 HospitalContext mainContext = new HospitalContext();
                 mainContext.patients = new List<Patient>();
@@ -435,7 +482,7 @@ namespace Hospital_Management_System
 
                             break;
                         case 0:
-
+                            stop = true;
                             break;
 
                     }
@@ -457,7 +504,8 @@ namespace Hospital_Management_System
 
 
 
-            }
+            
+
         }
     }
 }
