@@ -111,7 +111,7 @@ namespace Hospital_Management_System
                 Console.WriteLine("No doctors found with this specialization.");
                 return;
             }
-            foreach(Doctor DS in context.Decoders)
+            foreach(Doctor DS in DecodersSpecializationList)
             {
                 DS.DoctorInfo();
             }
@@ -170,7 +170,8 @@ namespace Hospital_Management_System
                 slotId= slotId,
                 doctorId = doctorId,
                 slotDate= dateOfSlot,
-                slotTime= timeOfSlot
+                slotTime= timeOfSlot,
+                isBooked = false
 
             });
 
@@ -184,125 +185,54 @@ namespace Hospital_Management_System
         {
             Console.WriteLine("Enter the patient Id");
             int IdOfPatient = int.Parse(Console.ReadLine());
-            //*********check if the patient found*********//
-            //bool patientFound = false;
-            //foreach (var patient in context.patients)
-            //{
-            //    if(IdOfPatient== patient.patientId)
-            //    {
-
-            //        Console.WriteLine("the Patient found, Now you can complete");
-            //        patientFound = true; 
-            //        break;
-
-            //    }
-            //    else
-            //    {
-            //        Console.WriteLine("the Patient not found");
-            //        return;
-            //    }
-
-            //}
-
 
             //*********check if the patient found By LINQ*********//
             bool patientFound = context.patients
                                        .Any(a => a.patientId == IdOfPatient);
-            Console.WriteLine($"The doctor was  found {patientFound}");
+            if (patientFound == false)
+            {
+                Console.WriteLine("The patient not found");
+                return;
+            }
 
+            //View All Doctors by Specialization Function
+            ViewDoctorsBySpecialization(context);
 
-
-
-            Console.WriteLine("Enter the doctor Id you want");
+            //*********check if the doctor found By LINQ*********//
+            Console.WriteLine("Enter the doctor Id");
             int IdOfDoctor = int.Parse(Console.ReadLine());
-            //check if the doctor found
-            //bool doctorFound = false;
-            //foreach (var doctor in context.Decoders)
-            //{
-            //    if (IdOfDoctor == doctor.doctorId)
-            //    {
-            //        Console.WriteLine("the doctor found, Now you can complete");
-            //        doctorFound = true;
-            //        break;
-            //    }
-            //    else
-            //    {
-            //        Console.WriteLine("the doctor not found");
-            //        return;
-            //    }
-
-            //}
-
-
-            //***************check if the doctor found By LINQ*****************
             bool doctorFound = context.Decoders
-                                      .Any(a => a.doctorId == IdOfDoctor);
-            Console.WriteLine($"The doctor was  found {doctorFound}");
-
-      
-          
+                                  .Any(a => a.doctorId == IdOfDoctor);
+            if (doctorFound == false) { Console.WriteLine($"The doctor not  found ");return; }
 
 
-            // **************view all available slots*************
 
-            //foreach (var book in context.AvailableSlotcs)
-            //{
 
-            //    if (book.isBooked == false && book.doctorId== IdOfDoctor)
-            //    {
-            //        Console.WriteLine($"slotId:{book.slotId}," +
-            //                          $"slotDate:{book.slotDate}," +
-            //                          $"slotTime:{book.slotTime}");
-            //        break;
-            //    }
-            //    else
-            //    {
-            //        Console.WriteLine("There are no available slots ");
-            //        return;
-            //    }
-            //}
-
-            // **************view all available slots By LINQ*************
             List<AvailableSlotc> AvailableSlotcList = context.AvailableSlotcs
                                                              .Where(a => a.isBooked == false &&
                                                                     a.doctorId == IdOfDoctor)
                                                               .ToList();
-            if (AvailableSlotcList.Count > 0)
-            {
-                PrintAvailableSlotc(AvailableSlotcList);
-            }
-            else
+            if (AvailableSlotcList.Count == 0)
             {
                 Console.WriteLine("There are no available slots ");
+                return;
             }
-
+            Console.WriteLine($"Available slots for Dr:");
+            AvailableSlotcList.ForEach(a => Console.WriteLine($"  Slot ID: {a.slotId}  |  Date: {a.slotDate}  |  Time: {a.slotTime}"));
 
             //Enter the slot ID
             Console.WriteLine("Enter the slot Id you want");
             int idOfSlot = int.Parse(Console.ReadLine());
 
-            bool slotFound = context.AvailableSlotcs
-                                     .Any(a => a.slotId == idOfSlot);
-
-
-
-            //Console.WriteLine("Enter the slot id ");
-            //int slotIdByUser = int.Parse(Console.ReadLine());
-        
-            //foreach (var slot in context.AvailableSlotcs)
-            //{
-            //    if (slot.slotId!= slotIdByUser)
-            //    {
-            //        Console.WriteLine("Invalid slot ");
-            //        return;
-            //    }
-            //    else
-            //    {
-            //        Console.WriteLine("the slot choosen ");
-            //        slot.isBooked = true;
-            //        break;
-            //    }
-            //}
+            AvailableSlotc slotFound = context.AvailableSlotcs
+                                              .FirstOrDefault(a =>
+                                             a.slotId == idOfSlot &&
+                                             a.doctorId == IdOfDoctor &&
+                                             a.isBooked == false);
+            if (slotFound == null) {
+                Console.WriteLine("Invalid slot Id");
+                return;
+            }
 
             int AppointmentId = (context.Appointments.Count) + 1;
             context.Appointments.Add(
@@ -311,19 +241,14 @@ namespace Hospital_Management_System
                     appointmentId = AppointmentId,
                     patientId = IdOfPatient,
                     doctorId = IdOfDoctor,
-                    slotId = idOfSlot
+                    appointmentDate= slotFound.slotDate,
+                    appointmentTime= slotFound.slotTime,
+                    status = "Scheduled"
                 });
-
+            slotFound.isBooked = true;
             Console.WriteLine("Book  Appointment Added Successfully with ID " + AppointmentId);
         }
-        //6.1 Print AvailableSlotc Function
-        static void PrintAvailableSlotc(List<AvailableSlotc> AvailableSlotcList)
-        {
-            foreach (AvailableSlotc a in AvailableSlotcList)
-            {
-                a.ConvertDataAvailableSlotcToString();
-            }
-        }
+        
 
 
 
