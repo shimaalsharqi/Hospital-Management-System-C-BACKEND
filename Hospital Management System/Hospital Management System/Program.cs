@@ -476,8 +476,9 @@ namespace Hospital_Management_System
                             MedicalRecordAfterVisit(mainContext);
                             break;
                         case 9:
-
-                            break;
+                        GeneratePatientMedicalHistoryReport(mainContext);
+                        break;
+                      
                         case 10:
 
                             break;
