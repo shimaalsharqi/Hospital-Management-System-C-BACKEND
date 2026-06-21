@@ -126,27 +126,20 @@ namespace Hospital_Management_System
         //5 Add an Available Time Slot for a Doctor Function
         public static void AddAvailableTimeSlot(HospitalContext context)
         {
-            Console.WriteLine("Enter the Doctor Id you Want");
+            //If no doctor found in the system
+            if (context.Decoders.Count == 0)
+            {
+                Console.WriteLine("No no doctor found in the system yet.");
+                return;
+            }
+            Console.WriteLine("Available doctors:");
+            context.Decoders.ForEach(d => Console.WriteLine($"  ID: {d.doctorId}  |  {d.doctorName}  ({d.doctorSpecialization})")
+            );
+
+            Console.WriteLine("Enter the Doctor Id ");
             int doctorId = int.Parse(Console.ReadLine());
 
-            //*****check the doctor if is found****//
-
-            //bool doctorFound = false;
-
-            //foreach (var doctor in context.Decoders)
-            //{
-            //    if (doctor.doctorId == numberOfId)
-            //    {
-            //        Console.WriteLine("The doctor was  found.");
-            //        doctorFound = true;
-            //        break;
-            //    }
-            //    else 
-            //    {
-            //        Console.WriteLine("The doctor was not found.");
-            //        return;
-            //    }
-            //}
+         
             //*****check the doctor if is found By LinQ****//
             bool doctorFound = context.Decoders
                                       .Any(a => a.doctorId == doctorId);
@@ -156,31 +149,17 @@ namespace Hospital_Management_System
                 return;
             }
             //enters  date and time
-            Console.WriteLine("Enter the date and time you want");
+            Console.WriteLine("Enter the date");
             string dateOfSlot = Console.ReadLine();
+            Console.WriteLine("Enter the time");
             string timeOfSlot = Console.ReadLine();
 
-            //****For check if there is any time or date repeat****//
-            //bool repeat = false;
-            //foreach (var slot in context.AvailableSlotcs)
-            //{
-            //    if (dateOfSlot != slot.slotDate && timeOfSlot != slot.slotTime)
-            //    {
-            //        Console.WriteLine("the date and time are not avilable");
-            //        repeat = true;
-            //        return;
-            //    }
-            //    else
-            //    {
-            //        Console.WriteLine("the date and time are avilable");
-            //    }
-            //}
-
+           
             //****For check if there is any time or date repeat By LINQ****//
             bool repeat= context.AvailableSlotcs
                                 .Any(a => a.slotDate == dateOfSlot && a.slotTime== timeOfSlot && a.doctorId==doctorId);
             if (repeat == true)
-            { Console.WriteLine("the date or time are repeated"); return; }
+            { Console.WriteLine("the date or time is repeated"); return; }
 
 
             //Add a new slot
@@ -195,7 +174,7 @@ namespace Hospital_Management_System
 
             });
 
-                Console.WriteLine("the slot has been added");
+                Console.WriteLine($"the slot has been added{slotId}");
             
         }
 
