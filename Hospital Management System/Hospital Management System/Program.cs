@@ -19,7 +19,7 @@ namespace Hospital_Management_System
             string name = Console.ReadLine();
             Console.WriteLine("Enter your age");
             int age = int.Parse(Console.ReadLine());
-            Console.WriteLine("Enter your Gender");
+            Console.WriteLine("Enter your Gender (Male/Female): ");
             string gender = Console.ReadLine();
             Console.WriteLine("Enter your phone number");
             string phoneNumber = Console.ReadLine();
@@ -80,55 +80,22 @@ namespace Hospital_Management_System
         }
 
         //3 View All Patients Function
-        public static void ViewAllPatients(HospitalContext context)
+        public static void ViewAllPatients(List<Patient> patients)
         {
-            //if (context.Decoders.Count== 0)
-            //{
-            //    Console.WriteLine("No patients registered yet.");
-            //    return;
-            //}
-            //else
-            //{
-            //    foreach (var patient in context.patients)
-            //    {
 
-            //        Console.WriteLine("ID: " + patient.patientId);
-            //        Console.WriteLine("Name: " + patient.patientName);
-            //        Console.WriteLine("Age: " + patient.patientAge);
-            //        Console.WriteLine("Gender: " + patient.patientGender);
-            //        Console.WriteLine("Phone: " + patient.patientPhone);
-            //        Console.WriteLine("Email: " + patient.patientEmail);
-            //        Console.WriteLine("Blood Type: " + patient.patientBloodType);
-            //    }
-            //}
-
-            ////////Solve By Linq//////////
-            List<Patient> patientsList = context.patients
-                                                .Where(a => a.patientId>0)
-                                                .ToList();
-            //To check
-            if (patientsList.Count > 0)
+            //If no patients have been registered
+            if (patients.Count == 0)
             {
-                Printpatients(patientsList);
+                Console.WriteLine("No patients registered yet.");
+                return;
             }
-            else
+            //To view every patient currently registered 
+            foreach (var patient in patients)
             {
-                Console.WriteLine("No patients registered yet");
-            }
 
-        }
-        //3.1 Print Patients Function
-        static void Printpatients(List<Patient> patientsList)
-        {
-            foreach (Patient a in patientsList)
-            {
-                a.ConvertDataPatientToString();
+                patient.PatientInfo();
             }
         }
-
-
-
-
 
 
         //4 View All Doctors by Specialization Function
