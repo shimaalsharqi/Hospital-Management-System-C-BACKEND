@@ -14,7 +14,7 @@ namespace Hospital_Management_System.HospitalModel
         public decimal consultationFee { get; set; }
 
         //Function To Convert the Data To String
-        public void ConvertDataPatientToString()
+        public void DoctorInfo()
         {
             Console.WriteLine($"{doctorId} | {doctorName,-10} | {doctorSpecialization,-8} |{doctorPhone,-8} |" +
                 $" {doctorEmail,-8} | {consultationFee,-8} ");

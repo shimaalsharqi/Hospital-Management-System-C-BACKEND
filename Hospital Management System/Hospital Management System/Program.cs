@@ -101,50 +101,24 @@ namespace Hospital_Management_System
         //4 View All Doctors by Specialization Function
         public static void ViewDoctorsBySpecialization(HospitalContext context)
         {
-            Console.WriteLine("Enter Specialization:");
-            string specialization = Console.ReadLine();
+            Console.WriteLine("Enter Specialization to search:");
+            string specialization = Console.ReadLine().ToLower(); ;
 
-            //foreach (var doctor in context.Decoders)
-            //{
-            //    if (doctor.doctorSpecialization == specialization)
-            //    {
+            List<Doctor> DecodersSpecializationList= context.Decoders.Where(d => d.doctorSpecialization== specialization.ToLower()).ToList();
 
-
-            //        Console.WriteLine("ID: " + doctor.doctorId);
-            //        Console.WriteLine("Name: " + doctor.doctorName);
-            //        Console.WriteLine("Specialization: " + doctor.doctorSpecialization);
-            //        Console.WriteLine("Phone: " + doctor.doctorPhone);
-            //        Console.WriteLine("Email: " + doctor.doctorEmail);
-
-            //    }
-            //    else
-            //    {
-            //        Console.WriteLine("No doctors found with this specialization.");
-            //    }
-            //}
-
-            //////***Solve by linq***//
-            List<Doctor> DoctorList = context.Decoders
-                                             .Where(a => a.doctorSpecialization != null)
-                                             .ToList();
-            //To check
-            if (DoctorList != null)
+            if (DecodersSpecializationList.Count == 0)
             {
-                PrintDoctors(DoctorList);
+                Console.WriteLine("No doctors found with this specialization.");
+                return;
             }
-            else
+            foreach(Doctor DS in context.Decoders)
             {
-                Console.WriteLine("No doctors found with this specialization");
+                DS.DoctorInfo();
             }
+
+            
         }
-        //4.1 Print Doctors Function
-        static void PrintDoctors(List<Doctor> Decoders)
-        {
-            foreach (Doctor a in Decoders)
-            {
-                a.ConvertDataPatientToString();
-            }
-        }
+
 
 
 
