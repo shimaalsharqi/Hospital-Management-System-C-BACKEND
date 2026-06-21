@@ -11,9 +11,10 @@ namespace Hospital_Management_System
 {
     public class Program
     {
-       
+
         //1 Patient Registration Function
-        public static void PatientRegistration(HospitalContext context) {
+        public static void PatientRegistration(HospitalContext context)
+        {
             //patient information
             Console.WriteLine("Enter your name");
             string name = Console.ReadLine();
@@ -32,14 +33,14 @@ namespace Hospital_Management_System
 
             context.patients.Add(
                 new Patient
-            {
-                patientId=userId,
-                patientName = name,
-                patientAge= age,
-                patientGender= gender,
-                patientPhone= phoneNumber,
-                patientEmail= Email,
-                patientBloodType= bloodType
+                {
+                    patientId = userId,
+                    patientName = name,
+                    patientAge = age,
+                    patientGender = gender,
+                    patientPhone = phoneNumber,
+                    patientEmail = Email,
+                    patientBloodType = bloodType
 
 
                 }
@@ -52,7 +53,7 @@ namespace Hospital_Management_System
         public static void AddDcotor(HospitalContext context)
         {
             Console.WriteLine("Enter the doctor Name");
-            string dname = Console.ReadLine(); 
+            string dname = Console.ReadLine();
             Console.WriteLine("Enter the doctor Specialization");
             string dSpecialization = Console.ReadLine();
             Console.WriteLine("Enter the doctor Phone Number");
@@ -104,19 +105,19 @@ namespace Hospital_Management_System
             Console.WriteLine("Enter Specialization to search:");
             string specialization = Console.ReadLine().ToLower(); ;
 
-            List<Doctor> DecodersSpecializationList= context.Decoders.Where(d => d.doctorSpecialization== specialization.ToLower()).ToList();
+            List<Doctor> DecodersSpecializationList = context.Decoders.Where(d => d.doctorSpecialization == specialization.ToLower()).ToList();
 
             if (DecodersSpecializationList.Count == 0)
             {
                 Console.WriteLine("No doctors found with this specialization.");
                 return;
             }
-            foreach(Doctor DS in DecodersSpecializationList)
+            foreach (Doctor DS in DecodersSpecializationList)
             {
                 DS.DoctorInfo();
             }
 
-            
+
         }
 
 
@@ -139,7 +140,7 @@ namespace Hospital_Management_System
             Console.WriteLine("Enter the Doctor Id ");
             int doctorId = int.Parse(Console.ReadLine());
 
-         
+
             //*****check the doctor if is found By LinQ****//
             bool doctorFound = context.Decoders
                                       .Any(a => a.doctorId == doctorId);
@@ -154,10 +155,10 @@ namespace Hospital_Management_System
             Console.WriteLine("Enter the time");
             string timeOfSlot = Console.ReadLine();
 
-           
+
             //****For check if there is any time or date repeat By LINQ****//
-            bool repeat= context.AvailableSlotcs
-                                .Any(a => a.slotDate == dateOfSlot && a.slotTime== timeOfSlot && a.doctorId==doctorId);
+            bool repeat = context.AvailableSlotcs
+                                .Any(a => a.slotDate == dateOfSlot && a.slotTime == timeOfSlot && a.doctorId == doctorId);
             if (repeat == true)
             { Console.WriteLine("the date or time is repeated"); return; }
 
@@ -167,16 +168,16 @@ namespace Hospital_Management_System
 
             context.AvailableSlotcs.Add(new AvailableSlotc
             {
-                slotId= slotId,
+                slotId = slotId,
                 doctorId = doctorId,
-                slotDate= dateOfSlot,
-                slotTime= timeOfSlot,
+                slotDate = dateOfSlot,
+                slotTime = timeOfSlot,
                 isBooked = false
 
             });
 
-                Console.WriteLine($"the slot has been added{slotId}");
-            
+            Console.WriteLine($"the slot has been added{slotId}");
+
         }
 
 
@@ -203,7 +204,7 @@ namespace Hospital_Management_System
             int IdOfDoctor = int.Parse(Console.ReadLine());
             bool doctorFound = context.Decoders
                                   .Any(a => a.doctorId == IdOfDoctor);
-            if (doctorFound == false) { Console.WriteLine($"The doctor not  found ");return; }
+            if (doctorFound == false) { Console.WriteLine($"The doctor not  found "); return; }
 
 
 
@@ -229,7 +230,8 @@ namespace Hospital_Management_System
                                              a.slotId == idOfSlot &&
                                              a.doctorId == IdOfDoctor &&
                                              a.isBooked == false);
-            if (slotFound == null) {
+            if (slotFound == null)
+            {
                 Console.WriteLine("Invalid slot Id");
                 return;
             }
@@ -241,227 +243,209 @@ namespace Hospital_Management_System
                     appointmentId = AppointmentId,
                     patientId = IdOfPatient,
                     doctorId = IdOfDoctor,
-                    appointmentDate= slotFound.slotDate,
-                    appointmentTime= slotFound.slotTime,
+                    appointmentDate = slotFound.slotDate,
+                    appointmentTime = slotFound.slotTime,
                     status = "Scheduled"
                 });
             slotFound.isBooked = true;
             Console.WriteLine("Book  Appointment Added Successfully with ID " + AppointmentId);
         }
-        
+
 
 
 
         //7 Cancel an Appointment Function
         public static void CancelAppointment(HospitalContext context)
         {
+            Console.WriteLine("Enter the patient Id");
+            int IdOfPatient = int.Parse(Console.ReadLine());
+
+            //*********check if the patient found By LINQ*********//
+            bool patientFound = context.patients
+                                       .Any(a => a.patientId == IdOfPatient);
+            if (patientFound == false)
+            {
+                Console.WriteLine("The patient not found");
+                return;
+            }
+
+            //Enter the slot ID
+            Console.WriteLine("Enter the slot Id");
+            int idOfSlot = int.Parse(Console.ReadLine());
+
+            AvailableSlotc slotFound = context.AvailableSlotcs
+                                              .FirstOrDefault(a =>
+                                             a.slotId == idOfSlot);
+
+            if (slotFound == null)
+            {
+                Console.WriteLine("Invalid slot Id");
+                return;
+            }
+
+
+
             Console.WriteLine("Enter the Book Appointment Id");
             int bookAppointmentId = int.Parse(Console.ReadLine());
+            Appointment bookAppointmentIdFound = context.Appointments
+                                                        .FirstOrDefault(a => a.appointmentId == bookAppointmentId);
+            if (bookAppointmentIdFound == null)
+            {
+                Console.WriteLine("The Book Appointment Id not found");
+                return;
+            }
+            if (bookAppointmentIdFound.status == "canceled")
+            {
+                Console.WriteLine("The Book Appointment Id already cancel");
+                return;
+            }
 
-            //bool appointmentIdfound = false;
+            if (bookAppointmentIdFound.status == "Completed")
+            {
+                Console.WriteLine("Cannot cancel completed appointment");
+                return;
+            }
+            bookAppointmentIdFound.status = "cancel";
+            slotFound.isBooked = false;
 
-            //foreach (var app in context.Appointments)
-            //{
-            //    if (app.appointmentId == bookAppointmentId)
-            //    {
-            //        appointmentIdfound = true;
+            Console.WriteLine($"The Book Appointment be cancel now {bookAppointmentId}");
 
-            //        if (app.status == "cancelled")
-            //        {
-            //            Console.WriteLine("Appointment already cancelled");
-            //        }
-            //        else
-            //        {
-            //            app.status = "cancelled";
-            //            Console.WriteLine("Appointment cancelled successfully");
-            //        }
-
-            //        break;
-            //    }
-            //}
-
-            //    if (appointmentIdfound = false)
-            //    {
-            //        Console.WriteLine("Appointment Id not found");
-            //    }
-
-
-            //********************Solveb By LINQ*************
 
         }
+
         //8 Create a Medical Record After a Visit Function
         public static void MedicalRecordAfterVisit(HospitalContext context)
         {
-            //Patient Info
-            Console.WriteLine("Enter the pateint Id");
-            int patientOfId = int.Parse(Console.ReadLine());
-            bool patientFound = false;
-            foreach (var petient in context.patients)
-            {
-              if(petient.patientId== patientOfId)
-                {
-                    Console.WriteLine("the Patient Id found");
-                    patientFound = true;
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("the Patient Id not found");
-                    return;
-                }
-            }
-
-            //Doctor Info
-          
-            Console.WriteLine("Enter the doctor Id");
-            int doctorOfId = int.Parse(Console.ReadLine());
-            bool doctorFound = false;
-            decimal visitFeeUser = 0;
-            foreach (var doctor in context.Decoders)
-            {
-                if (doctor.doctorId == doctorOfId)
-                {
-                    Console.WriteLine("the Doctor Id found");
-                    visitFeeUser = doctor.consultationFee;
-                    doctorFound = true;
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("the Doctor Id not found");
-                    return;
-                }
-            }
 
             //appointment Info
 
             Console.WriteLine("Enter the appointment Id");
             int appointmentOfId = int.Parse(Console.ReadLine());
-            bool appointmentFound = false;
-            foreach (var appointment in context.Appointments)
+            Appointment bookAppointmentIdFound = context.Appointments
+                                                          .FirstOrDefault(a => a.appointmentId == appointmentOfId);
+            if (bookAppointmentIdFound == null)
             {
-                if (appointment.appointmentId == appointmentOfId)
-                {
-                    Console.WriteLine("the appointment Id found");
-                    //To updated to reflect that the visit has been completed
-                    appointment.status = "completed";
-                    appointmentFound = true;
-                  
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("the appointment Id not found");
-                    return;
-                }
-                
+                Console.WriteLine("The Book Appointment Id not found");
+                return;
+            }
+            if (bookAppointmentIdFound.status == "canceled")
+            {
+                Console.WriteLine("Cannot create a medical record for a cancelled appointment");
+                return;
             }
 
-            Console.WriteLine("Enter the diagnosis");
-            string diagnosisUser = Console.ReadLine();
-
-            Console.WriteLine("Enter the prescription");
-            string prescriptionUser = Console.ReadLine();
-
-            Console.WriteLine("Enter the visitDate");
-            string visitDateUser = Console.ReadLine();
-  
-            int recordIdNew = (context.MedicalRecordcs.Count) + 1;
-            context.MedicalRecordcs.Add(
-                new MedicalRecordc
-                {
-                    recordId = recordIdNew,
-                    patientId = patientOfId,
-                    doctorId= doctorOfId,
-                    appointmentId= appointmentOfId,
-                    diagnosis= diagnosisUser,
-                    prescription= prescriptionUser,
-                    visitDate= visitDateUser,
-                    visitFee= visitFeeUser
-                }
-                );
-
-            Console.WriteLine("Record Id Added Successfully with ID " + recordIdNew);
-        } 
-
-        //Main the program Function
-        static void Main(string[] args)
-        {
-            //data storage for the system ( in memory )
-            HospitalContext mainContext = new HospitalContext();
-            mainContext.patients = new List<Patient>();
-            mainContext.MedicalRecordcs = new List<MedicalRecordc>();
-            mainContext.Decoders = new List<Doctor>();
-            mainContext.AvailableSlotcs = new List<AvailableSlotc>();
-            mainContext.Appointments = new List<Appointment>();
-
-            bool stop = false;
-
-            while (stop ==false)
+            if (bookAppointmentIdFound.status == "Completed")
             {
-                //the  menu of the system 
+                Console.WriteLine("A medical record already exists for this appointment");
 
-                Console.WriteLine("Welcom to the Hospital Management System");
-                Console.WriteLine("Please select an option:");
-                Console.WriteLine("1-Register patien");
-                Console.WriteLine("2-Add a New Doctor");
-                Console.WriteLine("3-View All Patients");
-                Console.WriteLine("4-View All Doctors by Specialization");
-                Console.WriteLine("5-Add an Available Time Slot for a Doctor");
-                Console.WriteLine("6-Book an Appointment");
-                Console.WriteLine("7-Cancel an Appointment");
-                Console.WriteLine("8-Create a Medical Record After a Visit");
-                Console.WriteLine("10-Generate a Patient Medical History Report");
-                Console.WriteLine("11-Doctor Workload and Revenue Summary");
-                Console.WriteLine("0- Exit");
+                // to get the consultationFee
+                decimal fee = context.Decoders.Where(d => d.doctorId == bookAppointmentIdFound.doctorId)
+                                             .Select(d => d.consultationFee)
+                                             .FirstOrDefault();
 
-                int option = int.Parse(Console.ReadLine());
-                switch (option)
-                {
-                    case 1:
-                        PatientRegistration(mainContext);
-                        break;
-                    case 2:
-                        AddDcotor(mainContext);
+                Console.WriteLine("Enter the diagnosis");
+                string diagnosisUser = Console.ReadLine();
 
-                        break;
-                    case 3:
-                        ViewAllPatients(mainContext);
-                        break;
-                    case 4:
-                        ViewDoctorsBySpecialization(mainContext);
-                        break;
-                    case 5:
-                        AddAvailableTimeSlot(mainContext);
-                        break;
-                    case 6:
-                        BookAppointment(mainContext);
-                        break;
-                    case 7:
-                        CancelAppointment(mainContext);
-                        break;
-                    case 8:
-                        MedicalRecordAfterVisit(mainContext);
-                        break;
-                    case 9:
+                Console.WriteLine("Enter the prescription");
+                string prescriptionUser = Console.ReadLine();
 
-                        break;
-                    case 10:
+                Console.WriteLine("Enter the visitDate");
+                string visitDateUser = Console.ReadLine();
 
-                        break;
-                    case 0:
+                int recordIdNew = (context.MedicalRecordcs.Count) + 1;
+                context.MedicalRecordcs.Add(
+                    new MedicalRecordc
+                    {
+                        recordId = recordIdNew,
+                        appointmentId = appointmentOfId,
+                        diagnosis = diagnosisUser,
+                        prescription = prescriptionUser,
+                        visitDate = visitDateUser,
+                        visitFee = fee
+                    }
+                    );
 
-                        break;
-
-                }
-
-                //To clear the cosole page 
-                Console.WriteLine("Please press any key ...");
-                Console.ReadKey();
-                Console.Clear();
-
+                Console.WriteLine($"Record Id Added Successfully with ID   {recordIdNew}  | Fee charged: {fee}");
+                bookAppointmentIdFound.status = "cmplated";
             }
 
+            //Main the program Function
+            static void Main(string[] args)
+            {
+                //data storage for the system ( in memory )
+                HospitalContext mainContext = new HospitalContext();
+                mainContext.patients = new List<Patient>();
+                mainContext.MedicalRecordcs = new List<MedicalRecordc>();
+                mainContext.Decoders = new List<Doctor>();
+                mainContext.AvailableSlotcs = new List<AvailableSlotc>();
+                mainContext.Appointments = new List<Appointment>();
+
+                bool stop = false;
+
+                while (stop == false)
+                {
+                    //the  menu of the system 
+
+                    Console.WriteLine("Welcom to the Hospital Management System");
+                    Console.WriteLine("Please select an option:");
+                    Console.WriteLine("1-Register patien");
+                    Console.WriteLine("2-Add a New Doctor");
+                    Console.WriteLine("3-View All Patients");
+                    Console.WriteLine("4-View All Doctors by Specialization");
+                    Console.WriteLine("5-Add an Available Time Slot for a Doctor");
+                    Console.WriteLine("6-Book an Appointment");
+                    Console.WriteLine("7-Cancel an Appointment");
+                    Console.WriteLine("8-Create a Medical Record After a Visit");
+                    Console.WriteLine("10-Generate a Patient Medical History Report");
+                    Console.WriteLine("11-Doctor Workload and Revenue Summary");
+                    Console.WriteLine("0- Exit");
+
+                    int option = int.Parse(Console.ReadLine());
+                    switch (option)
+                    {
+                        case 1:
+                            PatientRegistration(mainContext);
+                            break;
+                        case 2:
+                            AddDcotor(mainContext);
+
+                            break;
+                        case 3:
+                            ViewAllPatients(mainContext);
+                            break;
+                        case 4:
+                            ViewDoctorsBySpecialization(mainContext);
+                            break;
+                        case 5:
+                            AddAvailableTimeSlot(mainContext);
+                            break;
+                        case 6:
+                            BookAppointment(mainContext);
+                            break;
+                        case 7:
+                            CancelAppointment(mainContext);
+                            break;
+                        case 8:
+                            MedicalRecordAfterVisit(mainContext);
+                            break;
+                        case 9:
+
+                            break;
+                        case 10:
+
+                            break;
+                        case 0:
+
+                            break;
+
+                    }
+
+                    //To clear the cosole page 
+                    Console.WriteLine("Please press any key ...");
+                    Console.ReadKey();
+                    Console.Clear();
+
+                }
 
 
 
@@ -472,6 +456,8 @@ namespace Hospital_Management_System
 
 
 
+
+            }
         }
     }
 }

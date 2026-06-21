@@ -7,20 +7,24 @@
       "RelativeMoniker": "D:0:0:{B2077AB5-2C71-354F-580A-B4E62A617E34}|Hospital Management System\\Hospital Management System.csproj|solutionrelative:hospital management system\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B2077AB5-2C71-354F-580A-B4E62A617E34}|Hospital Management System\\Hospital Management System.csproj|c:\\users\\shima\\onedrive\\desktop\\backend task\\hospital-management-system-c-backend\\hospital management system\\hospital management system\\hospitalmodel\\availableslotc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B2077AB5-2C71-354F-580A-B4E62A617E34}|Hospital Management System\\Hospital Management System.csproj|solutionrelative:hospital management system\\hospitalmodel\\availableslotc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B2077AB5-2C71-354F-580A-B4E62A617E34}|Hospital Management System\\Hospital Management System.csproj|c:\\users\\shima\\onedrive\\desktop\\backend task\\hospital-management-system-c-backend\\hospital management system\\hospital management system\\hospitalmodel\\medicalrecordc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2077AB5-2C71-354F-580A-B4E62A617E34}|Hospital Management System\\Hospital Management System.csproj|solutionrelative:hospital management system\\hospitalmodel\\medicalrecordc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B2077AB5-2C71-354F-580A-B4E62A617E34}|Hospital Management System\\Hospital Management System.csproj|c:\\users\\shima\\onedrive\\desktop\\backend task\\hospital-management-system-c-backend\\hospital management system\\hospital management system\\hospitalcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B2077AB5-2C71-354F-580A-B4E62A617E34}|Hospital Management System\\Hospital Management System.csproj|solutionrelative:hospital management system\\hospitalcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B2077AB5-2C71-354F-580A-B4E62A617E34}|Hospital Management System\\Hospital Management System.csproj|c:\\users\\shima\\onedrive\\desktop\\backend task\\hospital-management-system-c-backend\\hospital management system\\hospital management system\\hospitalmodel\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2077AB5-2C71-354F-580A-B4E62A617E34}|Hospital Management System\\Hospital Management System.csproj|solutionrelative:hospital management system\\hospitalmodel\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B2077AB5-2C71-354F-580A-B4E62A617E34}|Hospital Management System\\Hospital Management System.csproj|c:\\users\\shima\\onedrive\\desktop\\backend task\\hospital-management-system-c-backend\\hospital management system\\hospital management system\\hospitalmodel\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B2077AB5-2C71-354F-580A-B4E62A617E34}|Hospital Management System\\Hospital Management System.csproj|solutionrelative:hospital management system\\hospitalmodel\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B2077AB5-2C71-354F-580A-B4E62A617E34}|Hospital Management System\\Hospital Management System.csproj|c:\\users\\shima\\onedrive\\desktop\\backend task\\hospital-management-system-c-backend\\hospital management system\\hospital management system\\hospitalmodel\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B2077AB5-2C71-354F-580A-B4E62A617E34}|Hospital Management System\\Hospital Management System.csproj|solutionrelative:hospital management system\\hospitalmodel\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B2077AB5-2C71-354F-580A-B4E62A617E34}|Hospital Management System\\Hospital Management System.csproj|c:\\users\\shima\\onedrive\\desktop\\backend task\\hospital-management-system-c-backend\\hospital management system\\hospital management system\\hospitalcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2077AB5-2C71-354F-580A-B4E62A617E34}|Hospital Management System\\Hospital Management System.csproj|solutionrelative:hospital management system\\hospitalcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2077AB5-2C71-354F-580A-B4E62A617E34}|Hospital Management System\\Hospital Management System.csproj|c:\\users\\shima\\onedrive\\desktop\\backend task\\hospital-management-system-c-backend\\hospital management system\\hospital management system\\hospitalmodel\\availableslotc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2077AB5-2C71-354F-580A-B4E62A617E34}|Hospital Management System\\Hospital Management System.csproj|solutionrelative:hospital management system\\hospitalmodel\\availableslotc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -40,7 +44,7 @@
               "RelativeDocumentMoniker": "Hospital Management System\\Program.cs",
               "ToolTip": "C:\\Users\\shima\\OneDrive\\Desktop\\backEnd Task\\Hospital-Management-System-C-BACKEND\\Hospital Management System\\Hospital Management System\\Program.cs",
               "RelativeToolTip": "Hospital Management System\\Program.cs",
-              "ViewState": "AgIAAHIAAAAAAAAAAAAIwLYAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAJIBAAAAAAAAAAAAAEEBAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-11T11:10:44.14Z",
               "IsPinned": true,
@@ -48,16 +52,29 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "HospitalContext.cs",
               "DocumentMoniker": "C:\\Users\\shima\\OneDrive\\Desktop\\backEnd Task\\Hospital-Management-System-C-BACKEND\\Hospital Management System\\Hospital Management System\\HospitalContext.cs",
               "RelativeDocumentMoniker": "Hospital Management System\\HospitalContext.cs",
               "ToolTip": "C:\\Users\\shima\\OneDrive\\Desktop\\backEnd Task\\Hospital-Management-System-C-BACKEND\\Hospital Management System\\Hospital Management System\\HospitalContext.cs",
               "RelativeToolTip": "Hospital Management System\\HospitalContext.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAADwvw4AAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAAAQAAAAAAAAAAADwvw4AAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-11T10:34:01.154Z",
               "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MedicalRecordc.cs",
+              "DocumentMoniker": "C:\\Users\\shima\\OneDrive\\Desktop\\backEnd Task\\Hospital-Management-System-C-BACKEND\\Hospital Management System\\Hospital Management System\\HospitalModel\\MedicalRecordc.cs",
+              "RelativeDocumentMoniker": "Hospital Management System\\HospitalModel\\MedicalRecordc.cs",
+              "ToolTip": "C:\\Users\\shima\\OneDrive\\Desktop\\backEnd Task\\Hospital-Management-System-C-BACKEND\\Hospital Management System\\Hospital Management System\\HospitalModel\\MedicalRecordc.cs",
+              "RelativeToolTip": "Hospital Management System\\HospitalModel\\MedicalRecordc.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-21T08:21:43.003Z",
               "EditorCaption": ""
             },
             {
@@ -68,26 +85,27 @@
               "RelativeDocumentMoniker": "Hospital Management System\\HospitalModel\\Appointment.cs",
               "ToolTip": "C:\\Users\\shima\\OneDrive\\Desktop\\backEnd Task\\Hospital-Management-System-C-BACKEND\\Hospital Management System\\Hospital Management System\\HospitalModel\\Appointment.cs",
               "RelativeToolTip": "Hospital Management System\\HospitalModel\\Appointment.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-21T07:28:48.665Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "Doctor.cs",
               "DocumentMoniker": "C:\\Users\\shima\\OneDrive\\Desktop\\backEnd Task\\Hospital-Management-System-C-BACKEND\\Hospital Management System\\Hospital Management System\\HospitalModel\\Doctor.cs",
               "RelativeDocumentMoniker": "Hospital Management System\\HospitalModel\\Doctor.cs",
               "ToolTip": "C:\\Users\\shima\\OneDrive\\Desktop\\backEnd Task\\Hospital-Management-System-C-BACKEND\\Hospital Management System\\Hospital Management System\\HospitalModel\\Doctor.cs",
               "RelativeToolTip": "Hospital Management System\\HospitalModel\\Doctor.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-21T05:31:21.212Z"
+              "WhenOpened": "2026-06-21T05:31:21.212Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "AvailableSlotc.cs",
               "DocumentMoniker": "C:\\Users\\shima\\OneDrive\\Desktop\\backEnd Task\\Hospital-Management-System-C-BACKEND\\Hospital Management System\\Hospital Management System\\HospitalModel\\AvailableSlotc.cs",
               "RelativeDocumentMoniker": "Hospital Management System\\HospitalModel\\AvailableSlotc.cs",
@@ -95,8 +113,7 @@
               "RelativeToolTip": "Hospital Management System\\HospitalModel\\AvailableSlotc.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAAwAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-17T06:25:10.217Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-17T06:25:10.217Z"
             }
           ]
         }
