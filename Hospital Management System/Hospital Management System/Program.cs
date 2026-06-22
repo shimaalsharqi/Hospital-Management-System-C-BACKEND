@@ -121,9 +121,6 @@ namespace Hospital_Management_System
         }
 
 
-
-
-
         //5 Add an Available Time Slot for a Doctor Function
         public static void AddAvailableTimeSlot(HospitalContext context)
         {
@@ -250,9 +247,6 @@ namespace Hospital_Management_System
             slotFound.isBooked = true;
             Console.WriteLine("Book  Appointment Added Successfully with ID " + AppointmentId);
         }
-
-
-
 
         //7 Cancel an Appointment Function
         public static void CancelAppointment(HospitalContext context)
@@ -415,6 +409,29 @@ namespace Hospital_Management_System
             });
 
         }
+
+
+        //10 Doctor Workload and Revenue Summary
+        public static void DoctorRevenueSummary(HospitalContext context)
+        {
+            if (context.Appointments.Count == 0)
+            {
+                Console.WriteLine("No appointments recorded");
+                return;
+            }
+
+            var doctorSummary = context.Decoders.Select(a => new { a.doctorId, a.doctorName, a.doctorSpecialization,
+                //Count the completed Appointments
+                completed = context.Appointments.Count(c=>c.doctorId==a.doctorId && c.status=="completed"),
+                //Count the canceled Appointments
+                canceled =context.Appointments.Count(d=>d.doctorId==a.doctorId && d.status=="canceled"),
+                // sum the total Revenue
+                sumRevenue= context.MedicalRecordcs.Where(r => r.doctorId==a.doctorId)
+                                                   .Sum(r=>r.visitFee)
+
+            }).OrderByDescending(b => b.sumRevenue)
+              .ToList(); 
+        }
         //Main the program Function
         static void Main(string[] args)
         {
@@ -480,8 +497,9 @@ namespace Hospital_Management_System
                         break;
                       
                         case 10:
+                        DoctorRevenueSummary(mainContext);
+                        break;
 
-                            break;
                         case 0:
                             stop = true;
                             break;
