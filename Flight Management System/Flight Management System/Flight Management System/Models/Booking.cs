@@ -10,9 +10,9 @@ namespace Flight_Management_System.Models
     {
         public int bookingId { get; set; }//System Generated
         public int passengerId { get; set; }//User Input
-        public int flightId { get; set; }//User Input
-        public string seatNumber { get; set; }//User Input
-        public string bookingDate { get; set; }//Calculated
+        public int flightId { get; set; }//User Input from list
+        public string seatNumber { get; set; }//User Input from list
+        public string bookingDate { get; set; }//Calculated from flightId
         public decimal totalPrice { get; set; }//Calculated
         public string status { get; set; }//Default Value  ,Confirmed | Cancelled
     }
