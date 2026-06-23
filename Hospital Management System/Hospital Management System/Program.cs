@@ -11,9 +11,17 @@ namespace Hospital_Management_System
 {
     public class Program
     {
-
+        //data storage for the system ( in memory )
+        public static HospitalContext context = new HospitalContext
+        {
+            patients = new List<Patient>(),
+            Decoders = new List<Doctor>(),
+            Appointments = new List<Appointment>(),
+            MedicalRecordcs = new List<MedicalRecordc>(),
+            AvailableSlotcs = new List<AvailableSlotc>()
+        };
         //1 Patient Registration Function
-        public static void PatientRegistration(HospitalContext context)
+        public static void PatientRegistration()
         {
             //patient information
             Console.WriteLine("Enter your name");
@@ -50,7 +58,7 @@ namespace Hospital_Management_System
         }
 
         //2 Add a New Doctor Function
-        public static void AddDcotor(HospitalContext context)
+        public static void AddDcotor()
         {
             Console.WriteLine("Enter the doctor Name");
             string dname = Console.ReadLine();
@@ -81,7 +89,7 @@ namespace Hospital_Management_System
         }
 
         //3 View All Patients Function
-        public static void ViewAllPatients(HospitalContext context)
+        public static void ViewAllPatients()
         {
 
             //If no patients have been registered
@@ -100,7 +108,7 @@ namespace Hospital_Management_System
 
 
         //4 View All Doctors by Specialization Function
-        public static void ViewDoctorsBySpecialization(HospitalContext context)
+        public static void ViewDoctorsBySpecialization()
         {
             Console.WriteLine("Enter Specialization to search:");
             string specialization = Console.ReadLine().ToLower(); ;
@@ -122,7 +130,7 @@ namespace Hospital_Management_System
 
 
         //5 Add an Available Time Slot for a Doctor Function
-        public static void AddAvailableTimeSlot(HospitalContext context)
+        public static void AddAvailableTimeSlot()
         {
             //If no doctor found in the system
             if (context.Decoders.Count == 0)
@@ -179,7 +187,7 @@ namespace Hospital_Management_System
 
 
         //6 Book an Appointment Function
-        public static void BookAppointment(HospitalContext context)
+        public static void BookAppointment()
         {
             Console.WriteLine("Enter the patient Id");
             int IdOfPatient = int.Parse(Console.ReadLine());
@@ -194,7 +202,7 @@ namespace Hospital_Management_System
             }
 
             //View All Doctors by Specialization Function
-            ViewDoctorsBySpecialization(context);
+            ViewDoctorsBySpecialization();
 
             //*********check if the doctor found By LINQ*********//
             Console.WriteLine("Enter the doctor Id");
@@ -249,7 +257,7 @@ namespace Hospital_Management_System
         }
 
         //7 Cancel an Appointment Function
-        public static void CancelAppointment(HospitalContext context)
+        public static void CancelAppointment()
         {
             Console.WriteLine("Enter the patient Id");
             int IdOfPatient = int.Parse(Console.ReadLine());
@@ -308,7 +316,7 @@ namespace Hospital_Management_System
         }
 
         //8 Create a Medical Record After a Visit Function
-        public static void MedicalRecordAfterVisit(HospitalContext context)
+        public static void MedicalRecordAfterVisit()
         {
 
             //appointment Info
@@ -365,7 +373,7 @@ namespace Hospital_Management_System
         }
 
         //9 Generate a Patient Medical History Report
-        public static void GeneratePatientMedicalHistoryReport(HospitalContext context)
+        public static void GeneratePatientMedicalHistoryReport()
         {
             Console.WriteLine("Enter the patient Id");
             int IdOfPatient = int.Parse(Console.ReadLine());
@@ -412,7 +420,7 @@ namespace Hospital_Management_System
 
 
         //10 Doctor Workload and Revenue Summary
-        public static void DoctorRevenueSummary(HospitalContext context)
+        public static void DoctorRevenueSummary()
         {
             if (context.Appointments.Count == 0)
             {
@@ -430,19 +438,19 @@ namespace Hospital_Management_System
                                                    .Sum(r=>r.visitFee)
 
             }).OrderByDescending(b => b.sumRevenue)
-              .ToList(); 
+              .ToList();
+            Console.WriteLine("\n  Rank  | Doctor Name               | Specialization       | Completed | Cancelled | Total Revenue");
+
+            for (int i = 0; i < doctorSummary.Count; i++)
+            {
+                var x = doctorSummary[i];
+                Console.WriteLine($"  #{i + 1,-5} | {x.doctorName,-25} | {x.doctorSpecialization,-20} |" +
+                                  $" {x.completed,-9} | {x.canceled,-9} | {x.sumRevenue:C}");
+            }
         }
         //Main the program Function
         static void Main(string[] args)
         {
-            
-                //data storage for the system ( in memory )
-                HospitalContext mainContext = new HospitalContext();
-                mainContext.patients = new List<Patient>();
-                mainContext.MedicalRecordcs = new List<MedicalRecordc>();
-                mainContext.Decoders = new List<Doctor>();
-                mainContext.AvailableSlotcs = new List<AvailableSlotc>();
-                mainContext.Appointments = new List<Appointment>();
 
                 bool stop = false;
 
@@ -460,57 +468,62 @@ namespace Hospital_Management_System
                     Console.WriteLine("6-Book an Appointment");
                     Console.WriteLine("7-Cancel an Appointment");
                     Console.WriteLine("8-Create a Medical Record After a Visit");
-                    Console.WriteLine("10-Generate a Patient Medical History Report");
-                    Console.WriteLine("11-Doctor Workload and Revenue Summary");
+                    Console.WriteLine("9-Generate a Patient Medical History Report");
+                    Console.WriteLine("10-Doctor Workload and Revenue Summary");
                     Console.WriteLine("0- Exit");
 
                     int option = int.Parse(Console.ReadLine());
                     switch (option)
                     {
                         case 1:
-                            PatientRegistration(mainContext);
+                            PatientRegistration();//Add , List(Patient)
                             break;
                         case 2:
-                            AddDcotor(mainContext);
+                            AddDcotor();//Add ,List(Dector)
 
                             break;
                         case 3:
-                            ViewAllPatients(mainContext);
+                            ViewAllPatients();//Read ,List(Patient)
                             break;
                         case 4:
-                            ViewDoctorsBySpecialization(mainContext);
+                            ViewDoctorsBySpecialization();//Reed,List(Dector)
                             break;
                         case 5:
-                            AddAvailableTimeSlot(mainContext);
+                            AddAvailableTimeSlot();//Add,internal Read, List(Dector,Patient,AvailableTimeSlot)
                             break;
                         case 6:
-                            BookAppointment(mainContext);
-                            break;
+                            BookAppointment();//Add,internal Read,update, List(Dector,Patient,AvailableTimeSlot,Appointment)
+                           break;
                         case 7:
-                            CancelAppointment(mainContext);
-                            break;
+                            CancelAppointment();//internal Read,update, List( AvailableTimeSlot, Appointment)
+                        break;
+                          
                         case 8:
-                            MedicalRecordAfterVisit(mainContext);
-                            break;
+                            MedicalRecordAfterVisit();//Add,internal Read
+                        break;
                         case 9:
-                        GeneratePatientMedicalHistoryReport(mainContext);
+                            GeneratePatientMedicalHistoryReport();//internal Read
                         break;
                       
                         case 10:
-                        DoctorRevenueSummary(mainContext);
-                        break;
+                            DoctorRevenueSummary();//Read
+                           break;
 
                         case 0:
                             stop = true;
                             break;
+                    default: Console.WriteLine("Invalid option. Please try again."); 
+                        break;
 
-                    }
+                }
 
-                    //To clear the cosole page 
+                //To clear the cosole page 
+                if (!stop)
+                {
                     Console.WriteLine("Please press any key ...");
                     Console.ReadKey();
                     Console.Clear();
-
+                }
                 }
 
 
