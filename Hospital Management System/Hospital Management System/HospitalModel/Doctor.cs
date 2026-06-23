@@ -6,12 +6,12 @@ namespace Hospital_Management_System.HospitalModel
 {
     public class Doctor
     {
-        public int doctorId { get; set; }
-        public string doctorName { get; set; }
-        public string doctorSpecialization { get; set; }
-        public string doctorPhone { get; set; }
-        public string doctorEmail { get; set; }
-        public decimal consultationFee { get; set; }
+        public int doctorId { get; set; }//System Generated
+        public string doctorName { get; set; }//User Input
+        public string doctorSpecialization { get; set; }//User Input
+        public string doctorPhone { get; set; }//User Input
+        public string doctorEmail { get; set; }//User Input
+        public decimal consultationFee { get; set; }//System Calculated
 
         //Function To Convert the Data To String
         public void DoctorInfo()
