@@ -116,6 +116,7 @@ namespace Flight_Management_System
         //5 Schedule a Flight
         public static void ScheduleFlight()
         {
+            Console.WriteLine("=====================Schedule a Flight====================");
             //choose an aircraft from the available operational fleet 
             List<Aircraft> aircraftsAvailable = context.Aircrafts.Where(a => a.isOperational == true).ToList();
             if (aircraftsAvailable == null)
@@ -159,7 +160,7 @@ namespace Flight_Management_System
 
             //check
             bool checkpilotId = context.Pilots.Any(p => p.pilotId == pilotIdInput);
-            if (checkpilotId == true)
+            if (checkpilotId == false)
             {
                 Console.WriteLine("Invalid pilot Id ");
                 return;
@@ -201,6 +202,75 @@ namespace Flight_Management_System
                    status = "Scheduled"
                });
             Console.WriteLine($"Register a Pilot Sucsseful with Id{flightId} and flight Code:{flightCodeSystem}");
+
+
+        }
+        //6  Book a Flight
+        public static void BookFlight()
+        {
+            Console.WriteLine("=====================Book a Flight====================");
+            Console.WriteLine("Enter Passenger Id");
+            int passengerIdInput = int.Parse(Console.ReadLine());
+
+            //check
+            bool checkpilotId = context.Passengers.Any(p => p.passengerId == passengerIdInput);
+            if (checkpilotId == false)
+            {
+                Console.WriteLine("Invalid Passenger Id ");
+                return;
+            }
+            Console.WriteLine("Enter destination");
+            string destinationInput = Console.ReadLine();
+
+            List<Flight> Flightsavailable = context.Flights.Where(f => f.availableSeats > 0  
+                                                                         && f.destination== destinationInput
+                                                                         && f.status== "Scheduled")
+                                                                .ToList();
+            if (Flightsavailable == null)
+            {
+                Console.WriteLine("No available Seats Or choose the correct destination");
+                return;
+            }
+            foreach(Flight s in Flightsavailable)
+            {
+                Console.WriteLine($"  flight Id: {s.flightId}  |  aircraft Id: {s.aircraftId}  |" +
+                    $"  flight Code: {s.flightCode} pilot Id: {s.pilotId}  |  origin: {s.origin}  |" +
+                    $"destination: {s.destination} departureDate: {s.departureDate}  |  departureTime: {s.departureTime}  |" +
+                    $"ticketPrice: {s.ticketPrice} duration: {s.duration}  |  availableSeats: {s.availableSeats} |  status: {s.status} |");
+            }
+            Console.WriteLine("Enter Flight Id");
+            int FlightIdInput = int.Parse(Console.ReadLine());
+
+            //check
+           
+            Flight checkFlightId = context.Flights.FirstOrDefault(p => p.flightId == FlightIdInput);
+            if (checkpilotId == null)
+            {
+                Console.WriteLine("Invalid Flight Id ");
+                return;
+            }
+            Console.WriteLine("Enter booking Date");
+            string bookingDateInput = Console.ReadLine();
+            int bookingId = context.Bookings.Count + 1;
+
+            string seatLabel = "Seat-" + (context.Bookings.Count + 1);
+
+            context.Bookings.Add(
+               new Booking
+               {
+                   bookingId = bookingId,
+                   passengerId = passengerIdInput,
+                   flightId = FlightIdInput,
+                   seatNumber = seatLabel,
+                   bookingDate = bookingDateInput,
+                   totalPrice = checkFlightId.ticketPrice,
+                   status = "Confirmed"
+
+               });
+            
+            checkFlightId.availableSeats= checkFlightId.availableSeats - 1;
+
+            Console.WriteLine($"The Booking  Sucsseful with Id{bookingId} and seat Label:{seatLabel}");
 
 
         }
