@@ -35,6 +35,7 @@ namespace Flight_Management_System
             if (checkpassportNumber == true)
             {
                 Console.WriteLine("Can not passport Number be repeat ");
+                return;
             }
             string pnationality = Console.ReadLine();
 
@@ -99,6 +100,82 @@ namespace Flight_Management_System
                });
             Console.WriteLine($"Register a Pilot Sucsseful with Id{pilotId}");
         }
+
+        // Add  Flights
+        public static void AddFlights()
+        {
+            Console.WriteLine("===================== Add  Flights====================");
+          
+            //View the aircraft Id
+            foreach(Aircraft d in context.Aircrafts)
+            {
+                Console.WriteLine($"  ID: {d.aircraftId}  |  {d.model}");
+            }
+
+            Console.WriteLine("Enter aircraft Id");
+            int aircraftIdInput = int.Parse(Console.ReadLine());
+            //check
+            Aircraft checkaircraftId = context.Aircrafts.FirstOrDefault(s => s.aircraftId == aircraftIdInput);
+            if (checkaircraftId == null)
+            {
+                Console.WriteLine("Invalid aircraft Id ");
+                return;
+            }
+            //View the  pilot Id
+            foreach (Pilot d in context.Pilots)
+            {
+                Console.WriteLine($"  ID: {d.pilotId}  |  pilot Name: {d.pilotName}");
+            }
+
+            Console.WriteLine("Enter pilot Id");
+            int pilotIdInput = int.Parse(Console.ReadLine());
+
+            //check
+            bool checkpilotId = context.Pilots.Any(p => p.pilotId == pilotIdInput);
+            if (checkpilotId == true)
+            {
+                Console.WriteLine("Invalid pilot Id ");
+                return;
+            }
+ 
+            Console.WriteLine("Enter origin");
+            string originInput = Console.ReadLine();
+            Console.WriteLine("Enter destination");
+            string destinationInput = Console.ReadLine();
+            Console.WriteLine("Enter departure Date");
+            string departureDateInput = Console.ReadLine();
+            Console.WriteLine("Enter departure Time");
+            string departureTimeInput = Console.ReadLine();
+            Console.WriteLine("Enter ticket Price");
+            decimal ticketPriceInput = decimal.Parse(Console.ReadLine());
+            Console.WriteLine("Enter duration");
+            double durationInput = double.Parse(Console.ReadLine());
+            Console.WriteLine("Enter flight Code");
+
+            //Genrate flight Code by system
+            string flightCodeSystem = "OA" + ((context.Flights.Count) + 1);
+            //Genrate flight Id by system
+            int flightId = (context.Flights.Count) + 1;
+
+            context.Flights.Add(
+               new Flight
+               {
+                   flightId = flightId,
+                   flightCode = flightCodeSystem,
+                   aircraftId = aircraftIdInput,
+                   pilotId = pilotIdInput,
+                   origin = originInput,
+                   destination = destinationInput,
+                   departureDate = departureDateInput,
+                   departureTime = departureTimeInput,
+                   ticketPrice = ticketPriceInput,
+                   duration = durationInput,
+                   availableSeats = checkaircraftId.totalSeats,
+                   status = "Scheduled"
+               });
+            Console.WriteLine($"Register a Pilot Sucsseful with Id{flightId} and flight Code:{flightCodeSystem}");
+
+        }
         static void Main(string[] args)
         {
             bool stop = false;
@@ -133,7 +210,7 @@ namespace Flight_Management_System
 
                         break;
                     case 3:
-                        // RegisterPilot(); //Add,From List(Pilots)
+                        RegisterPilot(); //Add,From List(Pilots)
                         break;
                     case 4:
                         // ViewAllFlights(); //Read ,From List(Flights)
