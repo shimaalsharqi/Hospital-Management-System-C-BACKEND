@@ -101,13 +101,31 @@ namespace Flight_Management_System
             Console.WriteLine($"Register a Pilot Sucsseful with Id{pilotId}");
         }
 
-        // Add  Flights
-        public static void AddFlights()
+        //4 View All Flights
+        public static void ViewAllFlights()
         {
-            Console.WriteLine("===================== Add  Flights====================");
-          
-            //View the aircraft Id
-            foreach(Aircraft d in context.Aircrafts)
+            Console.WriteLine("===================== View All Flights ====================");
+            foreach(Flight s in context.Flights)
+            {
+                Console.WriteLine($"  flight Id: {s.flightId}  |  aircraft Id: {s.aircraftId}  |" +
+                    $"  flight Code: {s.flightCode} pilot Id: {s.pilotId}  |  origin: {s.origin}  |" +
+                    $"destination: {s.destination} departureDate: {s.departureDate}  |  departureTime: {s.departureTime}  |" +
+                    $"ticketPrice: {s.ticketPrice} duration: {s.duration}  |  availableSeats: {s.availableSeats} |  status: {s.status} |");
+            }
+        }
+        //5 Schedule a Flight
+        public static void ScheduleFlight()
+        {
+            //choose an aircraft from the available operational fleet 
+            List<Aircraft> aircraftsAvailable = context.Aircrafts.Where(a => a.isOperational == true).ToList();
+            if (aircraftsAvailable == null)
+            {
+                Console.WriteLine("there are no aircrafts are available operational ");
+                return;
+            }
+            //View the aircraft 
+
+            foreach (Aircraft d in aircraftsAvailable)
             {
                 Console.WriteLine($"  ID: {d.aircraftId}  |  {d.model}");
             }
@@ -121,8 +139,17 @@ namespace Flight_Management_System
                 Console.WriteLine("Invalid aircraft Id ");
                 return;
             }
+
+            //assign a pilot.  
+            List<Pilot> PilotsAvailable = context.Pilots.Where(a => a.isAvailable == true).ToList();
+            if (PilotsAvailable == null)
+            {
+                Console.WriteLine("there are no Pilots are available  ");
+                return;
+            }
             //View the  pilot Id
-            foreach (Pilot d in context.Pilots)
+
+            foreach (Pilot d in PilotsAvailable)
             {
                 Console.WriteLine($"  ID: {d.pilotId}  |  pilot Name: {d.pilotName}");
             }
@@ -137,7 +164,7 @@ namespace Flight_Management_System
                 Console.WriteLine("Invalid pilot Id ");
                 return;
             }
- 
+
             Console.WriteLine("Enter origin");
             string originInput = Console.ReadLine();
             Console.WriteLine("Enter destination");
@@ -175,18 +202,7 @@ namespace Flight_Management_System
                });
             Console.WriteLine($"Register a Pilot Sucsseful with Id{flightId} and flight Code:{flightCodeSystem}");
 
-        }
-        //4 View All Flights
-        public static void ViewAllFlights()
-        {
-            Console.WriteLine("===================== View All Flights ====================");
-            foreach(Flight s in context.Flights)
-            {
-                Console.WriteLine($"  flight Id: {s.flightId}  |  aircraft Id: {s.aircraftId}  |" +
-                    $"  flight Code: {s.flightCode} pilot Id: {s.pilotId}  |  origin: {s.origin}  |" +
-                    $"destination: {s.destination} departureDate: {s.departureDate}  |  departureTime: {s.departureTime}  |" +
-                    $"ticketPrice: {s.ticketPrice} duration: {s.duration}  |  availableSeats: {s.availableSeats} |  status: {s.status} |");
-            }
+
         }
         static void Main(string[] args)
         {
@@ -228,7 +244,7 @@ namespace Flight_Management_System
                         ViewAllFlights(); //Read ,From List(Flights)
                         break;
                     case 5:
-                        //ScheduleFlight(); //Add,internal read (Flights,Aircrafts,Pilots)
+                        ScheduleFlight(); //Add,internal read (Flights,Aircrafts,Pilots)
                         break;
                     case 6:
                         //BookFlight(); //Add,internal read (Bookings,Flights,Aircrafts,Pilots)
