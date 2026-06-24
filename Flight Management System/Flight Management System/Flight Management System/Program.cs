@@ -119,7 +119,7 @@ namespace Flight_Management_System
             Console.WriteLine("=====================Schedule a Flight====================");
             //choose an aircraft from the available operational fleet 
             List<Aircraft> aircraftsAvailable = context.Aircrafts.Where(a => a.isOperational == true).ToList();
-            if (aircraftsAvailable == null)
+            if (aircraftsAvailable.Count==0)
             {
                 Console.WriteLine("there are no aircrafts are available operational ");
                 return;
@@ -143,7 +143,7 @@ namespace Flight_Management_System
 
             //assign a pilot.  
             List<Pilot> PilotsAvailable = context.Pilots.Where(a => a.isAvailable == true).ToList();
-            if (PilotsAvailable == null)
+            if (PilotsAvailable.Count==0)
             {
                 Console.WriteLine("there are no Pilots are available  ");
                 return;
@@ -291,7 +291,7 @@ namespace Flight_Management_System
             List<Flight> FlightsView = context.Flights.Where(f =>f.status == "Scheduled")
                                                            .ToList();
 
-            if (FlightsView == null)
+            if (FlightsView.Count==0)
             {
                 Console.WriteLine("Flight Departed Or Cancelled");
                 return;
@@ -334,6 +334,34 @@ namespace Flight_Management_System
 
             Console.WriteLine("The Booking is Cancel Successful");
         }
+        //8 Depart a Flight 
+        public static void DepartFlight()
+        {
+            List<Flight> ScheduledFlight = context.Flights.Where(a => a.status == "Scheduled").ToList();
+            if (ScheduledFlight.Count==0)
+            {
+                Console.WriteLine("Flight Departed Or Cancelled");
+                return;
+            }
+            foreach (Flight f in ScheduledFlight)
+            {
+                Console.WriteLine($"flight Id:{f.flightId}| flight Code:{f.flightCode}");
+            }
+            Console.WriteLine("Enter Flight Id");
+            int FlightIdInput = int.Parse(Console.ReadLine());
+
+            //check Flight Id
+
+            Flight checkFlightId = context.Flights.FirstOrDefault(p => p.flightId == FlightIdInput);
+            if (checkFlightId == null)
+            {
+                Console.WriteLine("Invalid Flight Id ");
+                return;
+            }
+            checkFlightId.status = "Departed";
+        }
+
+
         static void Main(string[] args)
         {
             bool stop = false;
@@ -380,11 +408,11 @@ namespace Flight_Management_System
                         BookFlight(); //Add,internal read ,Update(Bookings,Flights,Aircrafts,Pilots)
                         break;
                     case 7:
-                        //CancelBooking();  //Internal Read,Update (Bookings)
+                        CancelBooking();  //Internal Read,Update (Bookings)
                         break;
 
                     case 8:
-                        //DepartFlight();  // Update
+                        DepartFlight();  // Update
                         break;
                     case 9:
                         //CancelFlight(); //Internal Read,Update (Flights)
