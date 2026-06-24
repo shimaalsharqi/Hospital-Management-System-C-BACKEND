@@ -274,6 +274,66 @@ namespace Flight_Management_System
 
 
         }
+        //7 Cancel a Booking
+        public static void CancelBooking()
+        {
+            Console.WriteLine("=====================Cancel a Booking====================");
+            Console.WriteLine("Enter Passenger Id");
+            int passengerIdInput = int.Parse(Console.ReadLine());
+
+            //check
+            bool checkPassengerId = context.Passengers.Any(p => p.passengerId == passengerIdInput);
+            if (checkPassengerId == false)
+            {
+                Console.WriteLine("Invalid Passenger Id ");
+                return;
+            }
+            List<Flight> FlightsView = context.Flights.Where(f =>f.status == "Scheduled")
+                                                           .ToList();
+
+            if (FlightsView == null)
+            {
+                Console.WriteLine("Flight Departed Or Cancelled");
+                return;
+            }
+            foreach (Flight s in FlightsView)
+            {
+                Console.WriteLine($"  flight Id: {s.flightId}  |  aircraft Id: {s.aircraftId}  |" +
+                    $"  flight Code: {s.flightCode} pilot Id: {s.pilotId}  |  origin: {s.origin}  |" +
+                    $"destination: {s.destination} departureDate: {s.departureDate}  |  departureTime: {s.departureTime}  |" +
+                    $"ticketPrice: {s.ticketPrice} duration: {s.duration}  |  availableSeats: {s.availableSeats} |  status: {s.status} |");
+            }
+            Console.WriteLine("Enter Flight Id");
+            int FlightIdInput = int.Parse(Console.ReadLine());
+
+            //check Flight Id
+
+            Flight checkFlightId = context.Flights.FirstOrDefault(p => p.flightId == FlightIdInput);
+            if (checkFlightId == null)
+            {
+                Console.WriteLine("Invalid Flight Id ");
+                return;
+            }
+
+            Console.WriteLine("Enter Booking Id");
+            int bookingIdInput = int.Parse(Console.ReadLine());
+
+            //check booking Id
+            Booking bookingIdFound = context.Bookings.FirstOrDefault(p => p.bookingId == bookingIdInput 
+                                                                       && p.status== "Confirmed");
+            if (bookingIdFound == null)
+            {
+                Console.WriteLine("Invalid Booking Id ");
+                return;
+            }
+
+            // status is set to Cancelled
+            bookingIdFound.status = "Cancelled";
+            //the seat is returned to the flight
+            checkFlightId.availableSeats = checkFlightId.availableSeats + 1;
+
+            Console.WriteLine("The Booking is Cancel Successful");
+        }
         static void Main(string[] args)
         {
             bool stop = false;
@@ -317,7 +377,7 @@ namespace Flight_Management_System
                         ScheduleFlight(); //Add,internal read (Flights,Aircrafts,Pilots)
                         break;
                     case 6:
-                        //BookFlight(); //Add,internal read (Bookings,Flights,Aircrafts,Pilots)
+                        BookFlight(); //Add,internal read ,Update(Bookings,Flights,Aircrafts,Pilots)
                         break;
                     case 7:
                         //CancelBooking();  //Internal Read,Update (Bookings)
