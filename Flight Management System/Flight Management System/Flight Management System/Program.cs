@@ -176,6 +176,18 @@ namespace Flight_Management_System
             Console.WriteLine($"Register a Pilot Sucsseful with Id{flightId} and flight Code:{flightCodeSystem}");
 
         }
+        //4 View All Flights
+        public static void ViewAllFlights()
+        {
+            Console.WriteLine("===================== View All Flights ====================");
+            foreach(Flight s in context.Flights)
+            {
+                Console.WriteLine($"  flight Id: {s.flightId}  |  aircraft Id: {s.aircraftId}  |" +
+                    $"  flight Code: {s.flightCode} pilot Id: {s.pilotId}  |  origin: {s.origin}  |" +
+                    $"destination: {s.destination} departureDate: {s.departureDate}  |  departureTime: {s.departureTime}  |" +
+                    $"ticketPrice: {s.ticketPrice} duration: {s.duration}  |  availableSeats: {s.availableSeats} |  status: {s.status} |");
+            }
+        }
         static void Main(string[] args)
         {
             bool stop = false;
@@ -213,7 +225,7 @@ namespace Flight_Management_System
                         RegisterPilot(); //Add,From List(Pilots)
                         break;
                     case 4:
-                        // ViewAllFlights(); //Read ,From List(Flights)
+                        ViewAllFlights(); //Read ,From List(Flights)
                         break;
                     case 5:
                         //ScheduleFlight(); //Add,internal read (Flights,Aircrafts,Pilots)

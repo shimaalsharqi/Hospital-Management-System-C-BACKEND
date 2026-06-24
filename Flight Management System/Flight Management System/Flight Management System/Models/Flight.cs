@@ -19,7 +19,6 @@ namespace Flight_Management_System.Models
         public decimal ticketPrice { get; set; }//User Input
         public double duration { get; set; }//User Input
         public int availableSeats { get; set; }  //Calculated
-
         public string status { get; set; }//Default Value, Scheduled | Departed | Cancelled
 
     }
