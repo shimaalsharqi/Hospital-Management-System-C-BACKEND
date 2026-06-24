@@ -1,6 +1,7 @@
 ﻿using Flight_Management_System.Models;
 using Microsoft.Win32;
 using System.Reflection.PortableExecutable;
+using System.Xml.Linq;
 
 namespace Flight_Management_System
 {
@@ -21,15 +22,20 @@ namespace Flight_Management_System
         public static void RegisterPassenger()
         {
             Console.WriteLine("=====================Register a Passenger====================");
-            Console.WriteLine("Enter passenger Name");
+            Console.WriteLine("Enter passenger  Full name");
             string pName = Console.ReadLine();
             Console.WriteLine("Enter Passenger Email");
             string pEmail = Console.ReadLine();
             Console.WriteLine("Enter Passenger Phone Number");
             string pPhone = Console.ReadLine();
-            Console.WriteLine("Enter Passenger passportNumber");
+            Console.WriteLine("Enter Passenger passport Number");
             string passportNumber = Console.ReadLine();
             Console.WriteLine("Enter Passenger nationality");
+            bool checkpassportNumber = context.Passengers.Any(p => p.passportNumber == passportNumber);
+            if (checkpassportNumber == true)
+            {
+                Console.WriteLine("Can not passport Number be repeat ");
+            }
             string pnationality = Console.ReadLine();
 
             int passengerId = (context.Passengers.Count) + 1;
@@ -67,6 +73,32 @@ namespace Flight_Management_System
                });
             Console.WriteLine($"Add an Aircraft Sucsseful with Id{aircraftId}");
         }
+        //3 Register a Pilot
+        public static void RegisterPilot()
+        {
+            Console.WriteLine("=====================Register a Pilot====================");
+            Console.WriteLine("Enter Pilot  Full name");
+            string pilotNameInput = Console.ReadLine();
+            Console.WriteLine("Enter Pilot Phone");
+            string pilotPhoneInput = Console.ReadLine();
+            Console.WriteLine("Enter Pilot license Number");
+            string pilotlicenseNumber = Console.ReadLine();
+            Console.WriteLine("Enter flight Hours");
+            int passportNumber = int.Parse(Console.ReadLine());
+
+            int pilotId = (context.Pilots.Count) + 1;
+            context.Pilots.Add(
+               new Pilot
+               {
+                   pilotId = pilotId,
+                   pilotName = pilotNameInput,
+                   pilotPhone = pilotPhoneInput,
+                   licenseNumber = pilotlicenseNumber,
+                   flightHours = 0,
+                   isAvailable = true
+               });
+            Console.WriteLine($"Register a Pilot Sucsseful with Id{pilotId}");
+        }
         static void Main(string[] args)
         {
             bool stop = false;
@@ -97,7 +129,7 @@ namespace Flight_Management_System
                         RegisterPassenger(); //Add,From List(Passengers)
                         break;
                     case 2:
-                        //AddAircraft();  //Add,From List(Aircrafts)
+                        AddAircraft();  //Add,From List(Aircrafts)
 
                         break;
                     case 3:
