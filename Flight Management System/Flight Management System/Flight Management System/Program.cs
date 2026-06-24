@@ -1,5 +1,6 @@
 ﻿using Flight_Management_System.Models;
 using Microsoft.Win32;
+using System.Reflection.PortableExecutable;
 
 namespace Flight_Management_System
 {
@@ -16,6 +17,56 @@ namespace Flight_Management_System
             Bookings = new List<Booking>()
         };
 
+        //1 Register a Passenger Funcation
+        public static void RegisterPassenger()
+        {
+            Console.WriteLine("=====================Register a Passenger====================");
+            Console.WriteLine("Enter passenger Name");
+            string pName = Console.ReadLine();
+            Console.WriteLine("Enter Passenger Email");
+            string pEmail = Console.ReadLine();
+            Console.WriteLine("Enter Passenger Phone Number");
+            string pPhone = Console.ReadLine();
+            Console.WriteLine("Enter Passenger passportNumber");
+            string passportNumber = Console.ReadLine();
+            Console.WriteLine("Enter Passenger nationality");
+            string pnationality = Console.ReadLine();
+
+            int passengerId = (context.Passengers.Count) + 1;
+
+            context.Passengers.Add(
+                new Passenger
+                {
+                    passengerId= passengerId,
+                    passengerName= pName,
+                    passengerEmail= pEmail,
+                    passengerPhone= pPhone,
+                    passportNumber= passportNumber,
+                    nationality= pnationality
+
+                });
+            Console.WriteLine($"Register a Passenger Sucsseful with Id{passengerId}");
+        }
+        // 2  Add an Aircraft Funcation
+        public static void AddAircraft()
+        {
+            Console.WriteLine("=====================Add an Aircraft====================");
+            Console.WriteLine("Enter Aircraft Model");
+            string aircraftModel = Console.ReadLine();
+            Console.WriteLine("Enter Aircraft total Seats");
+            int aircraftTotalSeats =int.Parse( Console.ReadLine());
+
+            int aircraftId = (context.Aircrafts.Count) + 1;
+            context.Aircrafts.Add(
+               new Aircraft
+               {
+                   aircraftId = aircraftId,
+                   model = aircraftModel,
+                   totalSeats = aircraftTotalSeats,
+                   isOperational = true
+               });
+            Console.WriteLine($"Add an Aircraft Sucsseful with Id{aircraftId}");
+        }
         static void Main(string[] args)
         {
             bool stop = false;
@@ -43,7 +94,7 @@ namespace Flight_Management_System
                 switch (option)
                 {
                     case 1:
-                        //RegisterPassenger(); //Add,From List(Passengers)
+                        RegisterPassenger(); //Add,From List(Passengers)
                         break;
                     case 2:
                         //AddAircraft();  //Add,From List(Aircrafts)
