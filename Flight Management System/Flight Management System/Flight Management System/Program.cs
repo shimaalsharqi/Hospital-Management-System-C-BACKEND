@@ -375,7 +375,70 @@ namespace Flight_Management_System
             Console.WriteLine($"Flight {checkFlightId.flightCode} departed successfully.");
         }
 
+        //9 Cancel a Flight
+     
+        public static void CancelFlight()
+        {
+            Console.WriteLine("===================== Cancel a Flight =====================");
 
+       
+            List<Flight> scheduledFlights = context.Flights
+                                                   .Where(f => f.status == "Scheduled")
+                                                   .ToList();
+
+            if (scheduledFlights.Count == 0)
+            {
+                Console.WriteLine("There are no scheduled flights.");
+                return;
+            }
+
+            foreach (Flight f in scheduledFlights)
+            {
+                Console.WriteLine($"Flight Id: {f.flightId} | Flight Code: {f.flightCode}");
+            }
+
+            Console.WriteLine("Enter Flight Id:");
+            int flightIdInput = int.Parse(Console.ReadLine());
+
+     
+            Flight selectedFlight = context.Flights
+                                           .FirstOrDefault(f => f.flightId == flightIdInput);
+
+            if (selectedFlight == null)
+            {
+                Console.WriteLine("Invalid Flight Id.");
+                return;
+            }
+            // flight is cancelled
+            selectedFlight.status = "Cancelled";
+
+            //e pilot assigned to that flight becomes available again
+            Pilot assignedPilot = context.Pilots
+                                         .FirstOrDefault(p => p.pilotId == selectedFlight.pilotId);
+
+            if (assignedPilot != null)
+            {
+                assignedPilot.isAvailable = true;
+            }
+
+         
+            List<Booking> affectedBookings = context.Bookings
+                                                    .Where(b => b.flightId == selectedFlight.flightId
+                                                             && b.status == "Confirmed")
+                                                    .ToList();
+
+            foreach (Booking booking in affectedBookings)
+            {
+                booking.status = "Cancelled";
+            }
+
+            //The system reports how many bookings were affected
+
+            int affectedCount = affectedBookings.Count;
+
+            Console.WriteLine($"Flight {selectedFlight.flightCode} was cancelled successfully.");
+            Console.WriteLine($"{affectedCount} booking(s) were affected.");
+        }
         static void Main(string[] args)
         {
             bool stop = false;
@@ -429,7 +492,7 @@ namespace Flight_Management_System
                         DepartFlight();  // Update
                         break;
                     case 9:
-                        //CancelFlight(); //Internal Read,Update (Flights)
+                        CancelFlight(); //Internal Read,Update (Flights)
                         break;
 
                     case 10:
