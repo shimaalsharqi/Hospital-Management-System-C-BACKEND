@@ -177,7 +177,7 @@ namespace Flight_Management_System
             Console.WriteLine("Enter ticket Price");
             decimal ticketPriceInput = decimal.Parse(Console.ReadLine());
             Console.WriteLine("Enter duration");
-            double durationInput = double.Parse(Console.ReadLine());
+            int durationInput = int.Parse(Console.ReadLine());
             Console.WriteLine("Enter flight Code");
 
             //Genrate flight Code by system
@@ -376,7 +376,6 @@ namespace Flight_Management_System
         }
 
         //9 Cancel a Flight
-     
         public static void CancelFlight()
         {
             Console.WriteLine("===================== Cancel a Flight =====================");
@@ -439,6 +438,65 @@ namespace Flight_Management_System
             Console.WriteLine($"Flight {selectedFlight.flightCode} was cancelled successfully.");
             Console.WriteLine($"{affectedCount} booking(s) were affected.");
         }
+
+        //10 Passenger Booking History
+        public static void PassengerBookingHistory()
+        {
+            Console.WriteLine("===================== Passenger Booking History =====================");
+
+            Console.WriteLine("Enter Passenger Id");
+            int PassengerIdInput = int.Parse(Console.ReadLine());
+
+            Passenger checkPassengerId =
+                context.Passengers.FirstOrDefault
+                (p => p.passengerId == PassengerIdInput);
+
+            if (checkPassengerId == null)
+            {
+                Console.WriteLine("Invalid Passenger Id");
+                return;
+            }
+
+            List<Booking> bookingPassenger =
+                context.Bookings
+                .Where(b => b.passengerId == PassengerIdInput)
+                .ToList();
+
+            if (bookingPassenger.Count == 0)
+            {
+                Console.WriteLine("This passenger has no bookings.");
+                return;
+            }
+
+            decimal totalSpent = 0;
+
+            foreach (Booking f in bookingPassenger)
+            {
+                Flight flightIdFound =context.Flights.FirstOrDefault (a => a.flightId == f.flightId);
+
+                if (flightIdFound == null)
+                {
+                    continue;
+                }
+
+              
+                Console.WriteLine($"Flight Code: {flightIdFound.flightCode}");
+                Console.WriteLine($"Origin: {flightIdFound.origin}");
+                Console.WriteLine($"Destination: {flightIdFound.destination}");
+                Console.WriteLine($"Departure Date: {flightIdFound.departureDate}");
+                Console.WriteLine($"Seat Number: {f.seatNumber}");
+                Console.WriteLine($"Price Paid: {f.totalPrice}");
+                Console.WriteLine($"Booking Status: {f.status}");
+
+                if (f.status == "Confirmed")
+                {
+                    totalSpent += f.totalPrice;
+                }
+            }
+
+            Console.WriteLine("-----------------------------------");
+            Console.WriteLine($"Total Amount Spent: {totalSpent}");
+        }
         static void Main(string[] args)
         {
             bool stop = false;
@@ -496,7 +554,7 @@ namespace Flight_Management_System
                         break;
 
                     case 10:
-                        //PassengerBookingHistory(); //Read
+                        PassengerBookingHistory(); //Read
                         break;
                     case 11:
                         //FlightRevenueAndLoadFactorReport(); //Read
