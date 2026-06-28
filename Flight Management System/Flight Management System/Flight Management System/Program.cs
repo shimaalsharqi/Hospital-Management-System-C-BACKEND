@@ -359,6 +359,20 @@ namespace Flight_Management_System
                 return;
             }
             checkFlightId.status = "Departed";
+
+            Console.WriteLine("Enter Pilot Id");
+            int PilotIdInput = int.Parse(Console.ReadLine());
+
+            Pilot pilotIdFound = context.Pilots.FirstOrDefault(p => p.pilotId == PilotIdInput);
+            if (checkFlightId == null)
+            {
+                Console.WriteLine("Invalid Pilot Id ");
+                return;
+            }
+            pilotIdFound.isAvailable = false;
+            pilotIdFound.flightHours = pilotIdFound.flightHours + checkFlightId.duration;
+
+            Console.WriteLine($"Flight {checkFlightId.flightCode} departed successfully.");
         }
 
 
