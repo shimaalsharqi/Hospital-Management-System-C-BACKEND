@@ -497,6 +497,11 @@ namespace Flight_Management_System
             Console.WriteLine("-----------------------------------");
             Console.WriteLine($"Total Amount Spent: {totalSpent}");
         }
+        //Flight Revenue & Load Factor Report
+        public static void FlightRevenueAndLoadFactorReport()
+        {
+
+        }
         static void Main(string[] args)
         {
             bool stop = false;
@@ -554,10 +559,10 @@ namespace Flight_Management_System
                         break;
 
                     case 10:
-                        PassengerBookingHistory(); //Read
+                        PassengerBookingHistory(); //Read,Update
                         break;
                     case 11:
-                        //FlightRevenueAndLoadFactorReport(); //Read
+                        FlightRevenueAndLoadFactorReport(); //Read
                         break;
                     case 0:
                         stop = true;

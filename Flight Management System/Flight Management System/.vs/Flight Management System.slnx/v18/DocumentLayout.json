@@ -40,7 +40,7 @@
               "RelativeDocumentMoniker": "Flight Management System\\Program.cs",
               "ToolTip": "C:\\Users\\shima\\OneDrive\\Desktop\\backEnd Task\\Hospital-Management-System-C-BACKEND\\Flight Management System\\Flight Management System\\Flight Management System\\Program.cs",
               "RelativeToolTip": "Flight Management System\\Program.cs",
-              "ViewState": "AgIAAHMBAAAAAAAAAAAAwPMBAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAAFEBAAAAAAAAAAAmwLoBAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-23T10:34:53.867Z",
               "IsPinned": true,
@@ -57,8 +57,7 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-23T11:09:30.997Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -71,8 +70,7 @@
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAA0AAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-24T07:57:03.708Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -96,8 +94,7 @@
               "RelativeToolTip": "Flight Management System\\Models\\Flight.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAUwBIAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-24T10:47:50.042Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-24T10:47:50.042Z"
             }
           ]
         }
